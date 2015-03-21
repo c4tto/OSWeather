@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OUa-0L-HNL">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -35,44 +35,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="768" y="-531"/>
         </scene>
         <!--Forecast-->
-        <scene sceneID="wg7-f3-ORb">
+        <scene sceneID="sNh-If-6VO">
             <objects>
-                <viewController id="8rJ-Kc-sve" userLabel="Forecast" customClass="ForecastViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                <tableViewController id="sRq-bY-Oal" customClass="ForecastTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dEs-qc-WJi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Forecast" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="230" y="279" width="141" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Forecast" image="Forecast" id="cPa-gy-q4n"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eUW-5y-qhr">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eUW-5y-qhr" id="Wp7-Vt-0VL">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sRq-bY-Oal" id="HWd-RF-zVw"/>
+                            <outlet property="delegate" destination="sRq-bY-Oal" id="29t-Pi-Z3T"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Forecast" image="Forecast" id="Qad-wz-GyO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WRk-bf-kXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="768" y="127"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DgD-2m-dWd">
+            <objects>
+                <navigationController id="OUa-0L-HNL" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DpN-2c-V29">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="relationship" relationship="rootViewController" id="Qge-Na-lkf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TIg-KZ-E2l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-706" y="478"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="x3b-Ly-Tqs">
+                        <barButtonItem key="rightBarButtonItem" image="Location" id="3Mx-47-b2X">
+                            <connections>
+                                <segue destination="0JW-mv-QjO" kind="presentation" id="q1R-Wf-QWu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -81,16 +100,120 @@
                     </tabBar>
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="sRq-bY-Oal" kind="relationship" relationship="viewControllers" id="8z5-kr-1e7"/>
+                        <segue destination="p4h-O2-L75" kind="relationship" relationship="viewControllers" id="v0C-lK-zdh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="38" y="478"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="l91-dN-uJf">
+            <objects>
+                <tableViewController id="p4h-O2-L75" customClass="SettingsTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="O02-9K-zvt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6IN-tO-ycx">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6IN-tO-ycx" id="UCy-YN-adQ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="p4h-O2-L75" id="ehs-a5-7kO"/>
+                            <outlet property="delegate" destination="p4h-O2-L75" id="OLZ-of-M5f"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="Kyo-cB-7Jf"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E75-mg-R3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792" y="934"/>
+        </scene>
+        <!--Location-->
+        <scene sceneID="zNz-3P-grC">
+            <objects>
+                <tableViewController id="dgm-g4-lJ7" userLabel="Location" customClass="LocationTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DJH-dh-EFd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="hOf-s6-L28">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="dgm-g4-lJ7" id="cpg-dL-fde"/>
+                            </connections>
+                        </searchBar>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1fV-Kq-oYT" userLabel="Add Location">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="Button">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gbg-rf-das">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gbg-rf-das" id="pyv-lc-xv5">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dgm-g4-lJ7" id="QwW-La-7Cp"/>
+                            <outlet property="delegate" destination="dgm-g4-lJ7" id="MKq-KI-ikK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="2YJ-On-oCw">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="HSg-52-C0U"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="0Xf-Qy-3vo" id="1GC-ps-8Dq"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ls3-le-K5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="0Xf-Qy-3vo">
+                    <connections>
+                        <outlet property="delegate" destination="dgm-g4-lJ7" id="aq1-fd-r59"/>
+                        <outlet property="searchBar" destination="hOf-s6-L28" id="mJO-m6-YQ4"/>
+                        <outlet property="searchContentsController" destination="dgm-g4-lJ7" id="kWP-c4-kYd"/>
+                        <outlet property="searchResultsDataSource" destination="dgm-g4-lJ7" id="PDp-Wt-OKN"/>
+                        <outlet property="searchResultsDelegate" destination="dgm-g4-lJ7" id="UIe-0d-mxd"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="792" y="1633"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Lrf-Cc-IYV">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yhj-Eq-m9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="0JW-mv-QjO" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ipi-Ji-xeD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dgm-g4-lJ7" kind="relationship" relationship="rootViewController" id="oE1-ZS-Y7v"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="38" y="1633"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Button" width="65" height="65"/>
         <image name="Forecast" width="23" height="22"/>
+        <image name="Location" width="22" height="14"/>
+        <image name="Settings" width="23" height="23"/>
         <image name="Today" width="24" height="24"/>
     </resources>
 </document>
