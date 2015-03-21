@@ -79,13 +79,9 @@
 		2B8FD05D1ABD596300265318 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				2B8FD0601ABD596300265318 /* AppDelegate.swift */,
-				2B8FD0691ABD596300265318 /* Images.xcassets */,
-				2B8FD0641ABD596300265318 /* ForecastViewController.swift */,
-				2B8FD06B1ABD596300265318 /* LaunchScreen.xib */,
-				2B8FD0661ABD596300265318 /* Main.storyboard */,
+				2BA78FA11ABD77CA005E14A8 /* Resources */,
+				2BA78F9F1ABD77AE005E14A8 /* Source */,
 				2B8FD05E1ABD596300265318 /* Supporting Files */,
-				2B8FD0621ABD596300265318 /* TodayViewController.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -113,6 +109,26 @@
 				2B8FD0771ABD596300265318 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2BA78F9F1ABD77AE005E14A8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				2B8FD0601ABD596300265318 /* AppDelegate.swift */,
+				2B8FD0641ABD596300265318 /* ForecastViewController.swift */,
+				2B8FD0621ABD596300265318 /* TodayViewController.swift */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		2BA78FA11ABD77CA005E14A8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B8FD0691ABD596300265318 /* Images.xcassets */,
+				2B8FD06B1ABD596300265318 /* LaunchScreen.xib */,
+				2B8FD0661ABD596300265318 /* Main.storyboard */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
