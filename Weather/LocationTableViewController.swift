@@ -12,6 +12,8 @@ class LocationTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Location"
     }
 
     override func didReceiveMemoryWarning() {
