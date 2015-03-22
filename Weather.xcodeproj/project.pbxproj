@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B09522E1ABF043B0036020F /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B09522D1ABF043B0036020F /* DismissSegue.swift */; };
 		2B8FD0611ABD596300265318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FD0601ABD596300265318 /* AppDelegate.swift */; };
 		2B8FD0631ABD596300265318 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FD0621ABD596300265318 /* TodayViewController.swift */; };
 		2B8FD0681ABD596300265318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8FD0661ABD596300265318 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B09522D1ABF043B0036020F /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		2B8FD05B1ABD596300265318 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B8FD05F1ABD596300265318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B8FD0601ABD596300265318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B09522F1ABF044A0036020F /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				2B09522D1ABF043B0036020F /* DismissSegue.swift */,
+			);
+			name = Segues;
+			sourceTree = "<group>";
+		};
 		2B8FD0521ABD596300265318 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +181,7 @@
 		2BA78F9F1ABD77AE005E14A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2B09522F1ABF044A0036020F /* Segues */,
 				2B8FD0601ABD596300265318 /* AppDelegate.swift */,
 				2B9EC6761ABE0FF70008F7FE /* Cells */,
 				2BA78FA21ABD7F08005E14A8 /* Controllers */,
@@ -337,6 +348,7 @@
 				2BA78FA61ABD8367005E14A8 /* ForecastTableViewController.swift in Sources */,
 				2BCCE6FA1ABEFCFD0085B3AE /* AppTabBarController.swift in Sources */,
 				2BAE24801ABD8CA20080E0B3 /* LocationViewController.swift in Sources */,
+				2B09522E1ABF043B0036020F /* DismissSegue.swift in Sources */,
 				2B8FD0631ABD596300265318 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

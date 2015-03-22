@@ -161,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="710" y="-535"/>
+            <point key="canvasLocation" x="768" y="-300"/>
         </scene>
         <!--Forecast-->
         <scene sceneID="sNh-If-6VO">
@@ -181,7 +181,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRk-bf-kXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="127"/>
+            <point key="canvasLocation" x="768" y="359"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DgD-2m-dWd">
@@ -290,7 +290,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E75-mg-R3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="792" y="934"/>
+            <point key="canvasLocation" x="768" y="1017"/>
         </scene>
         <!--Location-->
         <scene sceneID="N4u-NW-P5C">
@@ -330,7 +330,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Pe-Fz-KhM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mHq-Ng-2RF"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mHq-Ng-2RF">
+                            <connections>
+                                <segue destination="49e-Tb-3d3" kind="custom" customClass="DismissSegue" customModule="Weather" id="f8Z-XQ-Kns"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="t3Z-ya-Z2D" id="o9F-OW-Ps6"/>
@@ -338,7 +342,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ug0-2q-iLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="792" y="1633"/>
+            <point key="canvasLocation" x="768" y="1677"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lrf-Cc-IYV">
@@ -354,7 +358,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yhj-Eq-m9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="1633"/>
+            <point key="canvasLocation" x="38" y="1677"/>
         </scene>
     </scenes>
     <resources>
@@ -371,4 +375,7 @@
         <image name="VerticalDivider" width="3" height="21"/>
         <image name="Wind" width="25" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="f8Z-XQ-Kns"/>
+    </inferredMetricsTieBreakers>
 </document>
