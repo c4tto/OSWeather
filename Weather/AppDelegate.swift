@@ -35,18 +35,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initAppearance() {
+        let textColor = UIColor(rgba: "#333333")
+        let highlightedTextColor = UIColor(rgba: "#2f91ff")
         let barImage = UIImage(named: "Bar")?.resizableImageWithCapInsets(UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
         
         UINavigationBar.appearance().setBackgroundImage(barImage, forBarMetrics: .Default)
         UINavigationBar.appearance().shadowImage = UIImage(named: "BarLine")
         
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: "ProximaNova-semibold", size: 18) ?? UIFont.systemFontOfSize(18)
+            NSFontAttributeName: UIFont(name: "ProximaNova-semibold", size: 18) ?? UIFont.systemFontOfSize(18),
+            NSForegroundColorAttributeName: textColor,
         ]
         
         UITabBar.appearance().backgroundImage = barImage
+        UITabBar.appearance().tintColor = textColor
+        UITabBar.appearance().selectedImageTintColor = highlightedTextColor
         UITabBarItem.appearance().setTitleTextAttributes([
-            NSFontAttributeName: UIFont(name: "ProximaNova-semibold", size: 10) ?? UIFont.systemFontOfSize(10)
+            NSFontAttributeName: UIFont(name: "ProximaNova-semibold", size: 10) ?? UIFont.systemFontOfSize(10),
         ], forState: .Normal)
     }
 }
