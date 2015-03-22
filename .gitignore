@@ -16,6 +16,10 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+Weather.xcworkspace
+Pods
+Podfile.lock
+.DS_Store
 
 # CocoaPods
 #
