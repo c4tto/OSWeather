@@ -35,7 +35,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gn7-ut-cG7">
                                 <rect key="frame" x="140" y="124" width="320" height="380"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sun_Big" translatesAutoresizingMaskIntoConstraints="NO" id="d61-eZ-Eca">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SunBig" translatesAutoresizingMaskIntoConstraints="NO" id="d61-eZ-Eca">
                                         <rect key="frame" x="117" y="4" width="87" height="87"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prague, Czech Republic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDM-rC-7pD" userLabel="Location">
@@ -373,7 +373,7 @@
         <image name="Rain" width="22" height="22"/>
         <image name="Raindrop" width="16" height="19"/>
         <image name="Settings" width="23" height="23"/>
-        <image name="Sun_Big" width="87" height="87"/>
+        <image name="SunBig" width="87" height="87"/>
         <image name="Today" width="24" height="24"/>
         <image name="VerticalDivider" width="3" height="21"/>
         <image name="Wind" width="25" height="16"/>
