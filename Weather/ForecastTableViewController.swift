@@ -13,6 +13,10 @@ class ForecastTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var contentInset = self.tableView.contentInset
+        contentInset.top = self.parentViewController?.topLayoutGuide.length ?? contentInset.top
+        self.tableView.contentInset = contentInset
+        
         tableView?.registerNib(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "weatherCell")
     }
 

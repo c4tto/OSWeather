@@ -13,9 +13,12 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var contentInset = self.tableView.contentInset
+        contentInset.top = self.parentViewController?.topLayoutGuide.length ?? contentInset.top
+        self.tableView.contentInset = contentInset
     }
 
     override func viewWillAppear(animated: Bool) {
-        parentViewController?.navigationItem.title = "Settings"
+        self.parentViewController?.navigationItem.title = "Settings"
     }
 }
