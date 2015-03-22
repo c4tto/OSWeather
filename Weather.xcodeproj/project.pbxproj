@@ -58,6 +58,7 @@
 		2B9EC6741ABE09470008F7FE /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
 		2B9EC6771ABE10170008F7FE /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		2BA78FA51ABD8367005E14A8 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
+		2BACFA791ABF753C0004FEDD /* Weather-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Weather-Bridging-Header.h"; sourceTree = "<group>"; };
 		2BAE247F1ABD8CA20080E0B3 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		2BAE24811ABD8CBC0080E0B3 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2BCCE6F91ABEFCFD0085B3AE /* AppTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
@@ -188,13 +189,14 @@
 		2BA78F9F1ABD77AE005E14A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2B09522F1ABF044A0036020F /* Segues */,
 				2B8FD0601ABD596300265318 /* AppDelegate.swift */,
 				2B9EC6761ABE0FF70008F7FE /* Cells */,
 				2BA78FA21ABD7F08005E14A8 /* Controllers */,
 				2BA78FA31ABD7F17005E14A8 /* Models */,
+				2B09522F1ABF044A0036020F /* Segues */,
 				2BF5ED941ABE98CD0073166A /* Utils */,
 				2BA78FA41ABD7F26005E14A8 /* Views */,
+				2BACFA791ABF753C0004FEDD /* Weather-Bridging-Header.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -537,6 +539,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Weather/Weather-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -550,6 +553,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Weather/Weather-Bridging-Header.h";
 			};
 			name = Release;
 		};
