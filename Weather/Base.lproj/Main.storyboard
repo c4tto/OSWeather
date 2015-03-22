@@ -292,50 +292,50 @@
             <point key="canvasLocation" x="792" y="934"/>
         </scene>
         <!--Location-->
-        <scene sceneID="zNz-3P-grC">
+        <scene sceneID="N4u-NW-P5C">
             <objects>
-                <tableViewController id="dgm-g4-lJ7" userLabel="Location" customClass="LocationTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="DJH-dh-EFd">
+                <viewController id="aqs-h2-9xX" userLabel="Location" customClass="LocationViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bpl-GQ-M05"/>
+                        <viewControllerLayoutGuide type="bottom" id="0kP-Df-UNQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LdK-26-kPy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="hOf-s6-L28">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="dgm-g4-lJ7" id="cpg-dL-fde"/>
-                            </connections>
-                        </searchBar>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1fV-Kq-oYT" userLabel="Add Location">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="Button">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                        <connections>
-                            <outlet property="dataSource" destination="dgm-g4-lJ7" id="QwW-La-7Cp"/>
-                            <outlet property="delegate" destination="dgm-g4-lJ7" id="MKq-KI-ikK"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="2YJ-On-oCw">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="HSg-52-C0U"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t3Z-ya-Z2D">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="aqs-h2-9xX" id="T4D-fF-MXJ"/>
+                                    <outlet property="delegate" destination="aqs-h2-9xX" id="sz8-q3-V1s"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fV-Kq-oYT" userLabel="Add Location">
+                                <rect key="frame" x="268" y="515" width="65" height="65"/>
+                                <state key="normal" image="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.25222379444301368" blue="0.20305049665752273" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0kP-Df-UNQ" firstAttribute="top" secondItem="1fV-Kq-oYT" secondAttribute="bottom" constant="20" id="9fD-V9-SiJ"/>
+                            <constraint firstAttribute="bottom" secondItem="t3Z-ya-Z2D" secondAttribute="bottom" id="EYo-CS-iIq"/>
+                            <constraint firstItem="t3Z-ya-Z2D" firstAttribute="top" secondItem="LdK-26-kPy" secondAttribute="top" id="hE8-Z6-vd0"/>
+                            <constraint firstItem="t3Z-ya-Z2D" firstAttribute="centerX" secondItem="1fV-Kq-oYT" secondAttribute="centerX" id="mI9-zN-yVV"/>
+                            <constraint firstAttribute="trailing" secondItem="t3Z-ya-Z2D" secondAttribute="trailing" id="mwB-ag-q9f"/>
+                            <constraint firstItem="t3Z-ya-Z2D" firstAttribute="leading" secondItem="LdK-26-kPy" secondAttribute="leading" id="r2q-kX-7tw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9Pe-Fz-KhM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mHq-Ng-2RF"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchDisplayController" destination="0Xf-Qy-3vo" id="1GC-ps-8Dq"/>
+                        <outlet property="tableView" destination="t3Z-ya-Z2D" id="o9F-OW-Ps6"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ls3-le-K5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="0Xf-Qy-3vo">
-                    <connections>
-                        <outlet property="delegate" destination="dgm-g4-lJ7" id="aq1-fd-r59"/>
-                        <outlet property="searchBar" destination="hOf-s6-L28" id="mJO-m6-YQ4"/>
-                        <outlet property="searchContentsController" destination="dgm-g4-lJ7" id="kWP-c4-kYd"/>
-                        <outlet property="searchResultsDataSource" destination="dgm-g4-lJ7" id="PDp-Wt-OKN"/>
-                        <outlet property="searchResultsDelegate" destination="dgm-g4-lJ7" id="UIe-0d-mxd"/>
-                    </connections>
-                </searchDisplayController>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ug0-2q-iLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="792" y="1633"/>
         </scene>
@@ -348,7 +348,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="dgm-g4-lJ7" kind="relationship" relationship="rootViewController" id="oE1-ZS-Y7v"/>
+                        <segue destination="aqs-h2-9xX" kind="relationship" relationship="rootViewController" id="RBQ-Yp-BeT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yhj-Eq-m9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
