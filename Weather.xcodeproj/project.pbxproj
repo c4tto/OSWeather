@@ -170,22 +170,13 @@
 			name = "User Interface";
 			sourceTree = "<group>";
 		};
-		2B9EC6761ABE0FF70008F7FE /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				2B9EC6771ABE10170008F7FE /* WeatherTableViewCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
 		2BA78F9F1ABD77AE005E14A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2B09522F1ABF044A0036020F /* Segues */,
 				2B8FD0601ABD596300265318 /* AppDelegate.swift */,
-				2B9EC6761ABE0FF70008F7FE /* Cells */,
 				2BA78FA21ABD7F08005E14A8 /* Controllers */,
 				2BA78FA31ABD7F17005E14A8 /* Models */,
+				2B09522F1ABF044A0036020F /* Segues */,
 				2BF5ED941ABE98CD0073166A /* Utils */,
 				2BA78FA41ABD7F26005E14A8 /* Views */,
 			);
@@ -224,6 +215,7 @@
 		2BA78FA41ABD7F26005E14A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B9EC6771ABE10170008F7FE /* WeatherTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
