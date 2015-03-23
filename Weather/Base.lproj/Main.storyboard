@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OUa-0L-HNL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -20,6 +20,26 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="VPd-zl-nMC">
+            <objects>
+                <navigationController id="CH0-rW-pNz" userLabel="Navigation Controller" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Today" image="Today" id="acW-dT-cKf"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="74k-NQ-OOn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2b3-qr-mVl">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="QHg-C0-YQ6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Og2-6o-rFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="-326"/>
+        </scene>
         <!--Today-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -157,16 +177,42 @@
                             <constraint firstAttribute="centerX" secondItem="gn7-ut-cG7" secondAttribute="centerX" id="MuP-bI-R0X"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Today" image="Today" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Today" id="HfS-iU-kOP">
+                        <barButtonItem key="rightBarButtonItem" image="Location" id="TWY-Bz-1cX">
+                            <connections>
+                                <segue destination="0JW-mv-QjO" kind="presentation" id="Yz3-ba-bcK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="-300"/>
+            <point key="canvasLocation" x="1493" y="-326"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n5H-cf-MVb">
+            <objects>
+                <navigationController id="s9i-en-WkB" userLabel="Navigation Controller" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Forecast" image="Forecast" id="Qad-wz-GyO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hBz-pr-HKz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sRq-bY-Oal" kind="relationship" relationship="rootViewController" id="Kki-fF-LD6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n21-GD-0cE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="380"/>
         </scene>
         <!--Forecast-->
         <scene sceneID="sNh-If-6VO">
             <objects>
-                <tableViewController id="sRq-bY-Oal" customClass="ForecastTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sRq-bY-Oal" userLabel="Forecast" customClass="ForecastTableViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dEs-qc-WJi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -176,39 +222,44 @@
                             <outlet property="delegate" destination="sRq-bY-Oal" id="29t-Pi-Z3T"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Forecast" image="Forecast" id="Qad-wz-GyO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="[City]" id="P0l-QQ-i9s">
+                        <barButtonItem key="rightBarButtonItem" image="Location" id="IBN-60-Mol">
+                            <connections>
+                                <segue destination="0JW-mv-QjO" kind="presentation" id="xXn-wY-hgb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRk-bf-kXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="359"/>
+            <point key="canvasLocation" x="1493" y="380"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="DgD-2m-dWd">
+        <scene sceneID="NT9-In-q3p">
             <objects>
-                <navigationController id="OUa-0L-HNL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DpN-2c-V29">
+                <navigationController id="CyS-cH-2cE" userLabel="Navigation Controller" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="Kyo-cB-7Jf"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="28m-ZG-iF1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="49e-Tb-3d3" kind="relationship" relationship="rootViewController" id="Qge-Na-lkf"/>
+                        <segue destination="p4h-O2-L75" kind="relationship" relationship="rootViewController" id="UXn-oQ-GQE"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TIg-KZ-E2l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QU2-UZ-r0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-706" y="478"/>
+            <point key="canvasLocation" x="768" y="1067"/>
         </scene>
         <!--App-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" userLabel="App" customClass="AppTabBarController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="x3b-Ly-Tqs">
-                        <barButtonItem key="rightBarButtonItem" image="Location" id="3Mx-47-b2X">
-                            <connections>
-                                <segue destination="0JW-mv-QjO" kind="presentation" id="q1R-Wf-QWu"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Location" id="3Mx-47-b2X"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
@@ -218,14 +269,14 @@
                     </tabBar>
                     <connections>
                         <outlet property="locationBarButtonItem" destination="3Mx-47-b2X" id="AWJ-RJ-Zlb"/>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="sRq-bY-Oal" kind="relationship" relationship="viewControllers" id="8z5-kr-1e7"/>
-                        <segue destination="p4h-O2-L75" kind="relationship" relationship="viewControllers" id="v0C-lK-zdh"/>
+                        <segue destination="CH0-rW-pNz" kind="relationship" relationship="viewControllers" id="Q0Q-B7-fvU"/>
+                        <segue destination="s9i-en-WkB" kind="relationship" relationship="viewControllers" id="Dgl-af-xnq"/>
+                        <segue destination="CyS-cH-2cE" kind="relationship" relationship="viewControllers" id="AXZ-P5-tZy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="478"/>
+            <point key="canvasLocation" x="38" y="497"/>
         </scene>
         <!--Settings-->
         <scene sceneID="l91-dN-uJf">
@@ -286,11 +337,11 @@
                             <outlet property="delegate" destination="p4h-O2-L75" id="OLZ-of-M5f"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="Kyo-cB-7Jf"/>
+                    <navigationItem key="navigationItem" title="Settings" id="INU-JX-boq"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E75-mg-R3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="1017"/>
+            <point key="canvasLocation" x="1493" y="1067"/>
         </scene>
         <!--Location-->
         <scene sceneID="N4u-NW-P5C">
@@ -319,7 +370,6 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.25222379444301368" blue="0.20305049665752273" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0kP-Df-UNQ" firstAttribute="top" secondItem="1fV-Kq-oYT" secondAttribute="bottom" constant="20" id="9fD-V9-SiJ"/>
                             <constraint firstAttribute="bottom" secondItem="t3Z-ya-Z2D" secondAttribute="bottom" id="EYo-CS-iIq"/>
@@ -329,10 +379,10 @@
                             <constraint firstItem="t3Z-ya-Z2D" firstAttribute="leading" secondItem="LdK-26-kPy" secondAttribute="leading" id="r2q-kX-7tw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9Pe-Fz-KhM">
+                    <navigationItem key="navigationItem" title="Location" id="9Pe-Fz-KhM">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="mHq-Ng-2RF">
                             <connections>
-                                <segue destination="49e-Tb-3d3" kind="custom" customClass="DismissSegue" customModule="Weather" id="f8Z-XQ-Kns"/>
+                                <segue destination="49e-Tb-3d3" kind="custom" customClass="DismissSegue" customModule="Weather" id="AD5-RA-vDE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -342,7 +392,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ug0-2q-iLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="1677"/>
+            <point key="canvasLocation" x="1493" y="1781"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lrf-Cc-IYV">
@@ -358,7 +408,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yhj-Eq-m9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="1677"/>
+            <point key="canvasLocation" x="768" y="1781"/>
         </scene>
     </scenes>
     <resources>
@@ -376,6 +426,6 @@
         <image name="Wind" width="25" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f8Z-XQ-Kns"/>
+        <segue reference="Yz3-ba-bcK"/>
     </inferredMetricsTieBreakers>
 </document>

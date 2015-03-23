@@ -1,8 +1,7 @@
-platform :ios, '8.0'
-use_frameworks!
+platform :ios, '7.1'
 
 target 'Weather' do
-pod 'Alamofire', '~> 1.1'
+pod "AFNetworking", "~> 2.0"
 end
 
 target 'WeatherTests' do
