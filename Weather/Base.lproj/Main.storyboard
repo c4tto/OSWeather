@@ -368,6 +368,9 @@
                                 <state key="normal" image="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="bhX-Wn-8ec" kind="presentation" id="oOr-ED-Dsx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -387,12 +390,92 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchDisplayController" destination="pE1-sE-MeS" id="oTs-RT-ah1"/>
                         <outlet property="tableView" destination="t3Z-ya-Z2D" id="o9F-OW-Ps6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ug0-2q-iLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchBar contentMode="redraw" searchBarStyle="prominent" id="RrF-JX-PeX">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="aqs-h2-9xX" id="hvS-G2-ebM"/>
+                    </connections>
+                </searchBar>
+                <searchDisplayController id="pE1-sE-MeS">
+                    <connections>
+                        <outlet property="delegate" destination="aqs-h2-9xX" id="hyD-yA-b2b"/>
+                        <outlet property="searchBar" destination="RrF-JX-PeX" id="YWq-jd-AqM"/>
+                        <outlet property="searchContentsController" destination="aqs-h2-9xX" id="vn8-GX-gTM"/>
+                        <outlet property="searchResultsDataSource" destination="aqs-h2-9xX" id="NkP-A6-ggh"/>
+                        <outlet property="searchResultsDelegate" destination="aqs-h2-9xX" id="UPu-jA-2Hc"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1493" y="1781"/>
+        </scene>
+        <!--Add Location-->
+        <scene sceneID="r4u-OQ-Pnv">
+            <objects>
+                <viewController id="khz-q2-Y9d" userLabel="Add Location" customClass="AddLocationViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i2K-cq-aMC"/>
+                        <viewControllerLayoutGuide type="bottom" id="yem-Qv-1KG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oDd-ZB-lQ4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZAj-go-hR4"/>
+                    <connections>
+                        <outlet property="closeBarButtonItem" destination="HVh-GJ-Mbc" id="BcC-K7-ahA"/>
+                        <outlet property="searchDisplayController" destination="x4Q-Qw-HdS" id="CGe-xo-bZF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F9I-aU-ali" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Close" id="HVh-GJ-Mbc">
+                    <connections>
+                        <segue destination="aqs-h2-9xX" kind="custom" customClass="DismissSegue" customModule="Weather" id="rwM-NL-Ox8"/>
+                    </connections>
+                </barButtonItem>
+                <searchBar contentMode="redraw" searchBarStyle="prominent" id="A9w-br-QRn">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="barTintColor" red="0.1843137255" green="0.56862745100000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="khz-q2-Y9d" id="WT5-Cp-xEC"/>
+                    </connections>
+                </searchBar>
+                <searchDisplayController id="x4Q-Qw-HdS">
+                    <connections>
+                        <outlet property="delegate" destination="khz-q2-Y9d" id="qM2-uR-SqC"/>
+                        <outlet property="searchBar" destination="A9w-br-QRn" id="DUb-5E-6DG"/>
+                        <outlet property="searchContentsController" destination="khz-q2-Y9d" id="eve-N7-JzF"/>
+                        <outlet property="searchResultsDataSource" destination="khz-q2-Y9d" id="Al7-XR-HjY"/>
+                        <outlet property="searchResultsDelegate" destination="khz-q2-Y9d" id="xDp-HL-fTq"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1493" y="2517"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Cq-Wv-Qws">
+            <objects>
+                <navigationController id="bhX-Wn-8ec" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n12-eV-oYF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="khz-q2-Y9d" kind="relationship" relationship="rootViewController" id="Xw6-c7-ubU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KRK-5m-Myb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="2517"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lrf-Cc-IYV">
@@ -426,6 +509,7 @@
         <image name="Wind" width="25" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="rwM-NL-Ox8"/>
         <segue reference="Yz3-ba-bcK"/>
     </inferredMetricsTieBreakers>
 </document>

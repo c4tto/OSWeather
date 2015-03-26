@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B09522E1ABF043B0036020F /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B09522D1ABF043B0036020F /* DismissSegue.swift */; };
+		2B1FA6A61AC2CB1E007CB96A /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 2B1FA6A51AC2CB1E007CB96A /* city.list.json */; };
+		2B83D6271AC2B2B200C7998E /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B83D6261AC2B2B200C7998E /* AddLocationViewController.swift */; };
 		2B8FD0611ABD596300265318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FD0601ABD596300265318 /* AppDelegate.swift */; };
 		2B8FD0631ABD596300265318 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8FD0621ABD596300265318 /* TodayViewController.swift */; };
 		2B8FD0681ABD596300265318 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8FD0661ABD596300265318 /* Main.storyboard */; };
@@ -41,6 +43,8 @@
 /* Begin PBXFileReference section */
 		0875057C18BEF26D5A2D36BA /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		2B09522D1ABF043B0036020F /* DismissSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
+		2B1FA6A51AC2CB1E007CB96A /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
+		2B83D6261AC2B2B200C7998E /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		2B8FD05B1ABD596300265318 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B8FD05F1ABD596300265318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B8FD0601ABD596300265318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,16 +172,6 @@
 			path = ProximaNova;
 			sourceTree = "<group>";
 		};
-		2B9EC6731ABE09190008F7FE /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-				2B8FD06B1ABD596300265318 /* LaunchScreen.xib */,
-				2B8FD0661ABD596300265318 /* Main.storyboard */,
-				2B9EC6741ABE09470008F7FE /* WeatherTableViewCell.xib */,
-			);
-			name = "User Interface";
-			sourceTree = "<group>";
-		};
 		2BA78F9F1ABD77AE005E14A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,7 +191,9 @@
 			children = (
 				2B9EC6621ABDD1430008F7FE /* Fonts */,
 				2B8FD0691ABD596300265318 /* Images.xcassets */,
-				2B9EC6731ABE09190008F7FE /* User Interface */,
+				2B8FD0661ABD596300265318 /* Main.storyboard */,
+				2B8FD06B1ABD596300265318 /* LaunchScreen.xib */,
+				2B1FA6A51AC2CB1E007CB96A /* city.list.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -205,6 +201,7 @@
 		2BA78FA21ABD7F08005E14A8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2B83D6261AC2B2B200C7998E /* AddLocationViewController.swift */,
 				2BCCE6F91ABEFCFD0085B3AE /* AppTabBarController.swift */,
 				2BA78FA51ABD8367005E14A8 /* ForecastTableViewController.swift */,
 				2BAE247F1ABD8CA20080E0B3 /* LocationViewController.swift */,
@@ -225,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				2B9EC6771ABE10170008F7FE /* WeatherTableViewCell.swift */,
+				2B9EC6741ABE09470008F7FE /* WeatherTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -344,6 +342,7 @@
 				2B8FD06A1ABD596300265318 /* Images.xcassets in Resources */,
 				2B9EC66A1ABDD1570008F7FE /* ProximaNova-Regular.otf in Resources */,
 				2B9EC66B1ABDD1570008F7FE /* ProximaNova-Semibold.otf in Resources */,
+				2B1FA6A61AC2CB1E007CB96A /* city.list.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +400,7 @@
 				2BA78FA61ABD8367005E14A8 /* ForecastTableViewController.swift in Sources */,
 				2BCCE6FA1ABEFCFD0085B3AE /* AppTabBarController.swift in Sources */,
 				2BAE24801ABD8CA20080E0B3 /* LocationViewController.swift in Sources */,
+				2B83D6271AC2B2B200C7998E /* AddLocationViewController.swift in Sources */,
 				2B09522E1ABF043B0036020F /* DismissSegue.swift in Sources */,
 				2B8FD0631ABD596300265318 /* TodayViewController.swift in Sources */,
 			);
