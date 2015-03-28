@@ -54,5 +54,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSFontAttributeName: UIFont(name: "ProximaNova-semibold", size: 10) ?? UIFont.systemFontOfSize(10),
         ], forState: .Normal)
     }
+    
+    // Why there is no correctly working pattern for lazy initiated readonly property in Swift??? Aaaaaaaargh!!!!
+    private var _weatherApi: OWMWeatherAPI?
+    var weatherApi: OWMWeatherAPI {
+        get {
+            if _weatherApi == nil {
+                let weatherApiKey = "3b9e5a5284eaa6be66f5cceb016b5471"
+                _weatherApi = OWMWeatherAPI(APIKey: weatherApiKey)
+            }
+            return _weatherApi!
+        }
+    }
 }
 

@@ -11,6 +11,14 @@ import UIKit
 class TodayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        appDelegate.weatherApi.currentWeatherByCityName("Prague,cz", withCallback: {
+            (error: NSError?, result: [NSObject : AnyObject]!) -> Void in
+            println("loaded \(result) \(error)")
+        })
+        
     }
     
     override func viewWillAppear(animated: Bool) {
