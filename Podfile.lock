@@ -1,13 +1,16 @@
 PODS:
   - AFNetworking (1.3.4)
+  - CLLocationManager-blocks (1.3.2)
   - OpenWeatherMapAPI (0.0.5):
     - AFNetworking (~> 1.3.1)
 
 DEPENDENCIES:
+  - CLLocationManager-blocks
   - OpenWeatherMapAPI (~> 0.0.5)
 
 SPEC CHECKSUMS:
   AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
+  CLLocationManager-blocks: 9e1da8264a297ede2ca71b29ff7827c87f40a4a8
   OpenWeatherMapAPI: dba532198d083cae09089adbdbaf2831a8fc0c66
 
 COCOAPODS: 0.36.1

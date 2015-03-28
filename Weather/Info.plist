@@ -51,5 +51,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Weather wants to know your current location</string>
 </dict>
 </plist>

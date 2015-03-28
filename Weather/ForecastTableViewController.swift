@@ -15,7 +15,14 @@ class ForecastTableViewController: UITableViewController {
         
         tableView?.registerNib(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "weatherCell")
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        appDelegate.weatherDataModel.forecastForCurrentLocation {
+            
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

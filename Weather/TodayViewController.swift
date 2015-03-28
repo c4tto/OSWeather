@@ -11,18 +11,24 @@ import UIKit
 class TodayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        
-        appDelegate.weatherApi.currentWeatherByCityName("Prague,cz", withCallback: {
-            (error: NSError?, result: [NSObject : AnyObject]!) -> Void in
-            println("loaded \(result) \(error)")
-        })
-        
     }
     
     override func viewWillAppear(animated: Bool) {
-        parentViewController?.navigationItem.title = "Today"
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let locationId: String? = nil
+        self.loadWeather(locationId) {
+            (result, error) -> Void in
+            println(result)
+        }
+    }
+    
+    func loadWeather(locationId: String?, callback: ([NSObject: AnyObject]?, NSError?) -> Void) {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let id = locationId {
+            appDelegate.weatherDataModel.weatherForLocationWithId(id, callback)
+        } else {
+            appDelegate.weatherDataModel.weatherForCurrentLocation(callback)
+        }
     }
 }
 

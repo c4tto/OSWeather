@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,16 +56,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ], forState: .Normal)
     }
     
-    // Why there is no correctly working pattern for lazy initiated readonly property in Swift??? Aaaaaaaargh!!!!
-    private var _weatherApi: OWMWeatherAPI?
-    var weatherApi: OWMWeatherAPI {
+    // MARK: - Weather Data Model
+    
+    // Why there is no convinient way to define lazy initiated readonly property in Swift??? Aaaaaaaargh!!!!
+    private var _weatherDataModel: WeatherDataModel?
+    internal var weatherDataModel: WeatherDataModel {
         get {
-            if _weatherApi == nil {
-                let weatherApiKey = "3b9e5a5284eaa6be66f5cceb016b5471"
-                _weatherApi = OWMWeatherAPI(APIKey: weatherApiKey)
+            if _weatherDataModel == nil {
+                _weatherDataModel = WeatherDataModel()
             }
-            return _weatherApi!
+            return _weatherDataModel!
         }
     }
 }
-

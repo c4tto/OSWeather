@@ -10,5 +10,6 @@
 #define Weather_Weather_Bridging_Header_h
 
 #import <OpenWeatherMapAPI/OWMWeatherApi.h>
+#import <CLLocationManager-blocks/CLLocationManager+blocks.h>
 
 #endif
