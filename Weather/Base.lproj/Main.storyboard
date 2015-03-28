@@ -258,9 +258,6 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" userLabel="App" customClass="AppTabBarController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="x3b-Ly-Tqs">
-                        <barButtonItem key="rightBarButtonItem" image="Location" id="3Mx-47-b2X"/>
-                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -268,7 +265,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <outlet property="locationBarButtonItem" destination="3Mx-47-b2X" id="AWJ-RJ-Zlb"/>
                         <segue destination="CH0-rW-pNz" kind="relationship" relationship="viewControllers" id="Q0Q-B7-fvU"/>
                         <segue destination="s9i-en-WkB" kind="relationship" relationship="viewControllers" id="Dgl-af-xnq"/>
                         <segue destination="CyS-cH-2cE" kind="relationship" relationship="viewControllers" id="AXZ-P5-tZy"/>
