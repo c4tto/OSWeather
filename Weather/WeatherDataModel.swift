@@ -26,6 +26,8 @@ class WeatherDataModel: NSObject {
             if _weatherApi == nil {
                 let weatherApiKey = "3b9e5a5284eaa6be66f5cceb016b5471"
                 _weatherApi = OWMWeatherAPI(APIKey: weatherApiKey)
+                _weatherApi?.setLangWithPreferedLanguage()
+                _weatherApi?.setTemperatureFormat(kOWMTempCelcius)
             }
             return _weatherApi!
         }
@@ -87,7 +89,7 @@ class WeatherDataModel: NSObject {
             } else {
                 callback(nil, error)
             }
-*/
+            */
         }
     }
     
