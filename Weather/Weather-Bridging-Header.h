@@ -9,7 +9,7 @@
 #ifndef Weather_Weather_Bridging_Header_h
 #define Weather_Weather_Bridging_Header_h
 
-#import <OpenWeatherMapAPI/OWMWeatherApi.h>
+#import <AFNetworking/AFNetworking.h>
 #import <CLLocationManager-blocks/CLLocationManager+blocks.h>
 
 #endif
