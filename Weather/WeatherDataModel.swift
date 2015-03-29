@@ -36,17 +36,26 @@ class WeatherDataModel: NSObject {
         get {
             if _locationManager == nil {
                 _locationManager = CLLocationManager.updateManagerWithAccuracy(kCLLocationAccuracyKilometer, locationAge: 15.0, authorizationDesciption: .WhenInUse)
-                //_locationManager?.requestWhenInUseAuthorization()
             }
             return _locationManager!
         }
     }
     
-    private func getCurrentLocation(callback: (CLLocation?, NSError?) -> Void) {
+    private func getCurrentLocation(callback: (CLPlacemark?, NSError?) -> Void) {
+        
         self.locationManager.startUpdatingLocationWithUpdateBlock {
             (manager: CLLocationManager?, location: CLLocation?, error: NSError?,
             stopUpdating: UnsafeMutablePointer<ObjCBool>) -> Void in
-            callback(location, error)
+            
+            if let location = location {
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
+                    (placemarks: [AnyObject]!, error: NSError!) -> Void in
+                    let placemark: CLPlacemark = placemarks[0] as CLPlacemark
+                    callback(placemark, error)
+                })
+            } else {
+                callback(nil, error)
+            }
             stopUpdating.memory = true
         }
     }
@@ -57,20 +66,33 @@ class WeatherDataModel: NSObject {
     func weatherForCurrentLocation(callback: ([NSObject: AnyObject]?, NSError?) -> Void) {
         println("weather for current location")
         self.getCurrentLocation {
-            (location: CLLocation?, error: NSError?) -> Void in
+            (placemark: CLPlacemark?, error: NSError?) -> Void in
+            
+            if let placemark = placemark {
+                let cityName = "\(placemark.locality),\(placemark.ISOcountryCode)"
+                self.weatherApi.currentWeatherByCityName(cityName, withCallback: {
+                    (error: NSError!, result: [NSObject: AnyObject]!) -> Void in
+                    callback(result, error)
+                })
+            } else {
+                callback(nil, error);
+            }
+            /*
             if let coordinate = location?.coordinate {
                 self.weatherApi.currentWeatherByCoordinate(coordinate, withCallback: {
                     (error: NSError!, result: [NSObject: AnyObject]!) -> Void in
+                    
                     callback(result, error)
                 })
             } else {
                 callback(nil, error)
             }
+*/
         }
     }
     
-    func weatherForLocationWithId(locationId: String, callback: ([NSObject: AnyObject]?, NSError?) -> Void) {
-        self.weatherApi.currentWeatherByCityId(locationId, withCallback: {
+    func weatherForLocationWithName(locationName: String, callback: ([NSObject: AnyObject]?, NSError?) -> Void) {
+        self.weatherApi.currentWeatherByCityName(locationName, withCallback: {
             (error: NSError!, result: [NSObject: AnyObject]!) -> Void in
             callback(result, error)
         })

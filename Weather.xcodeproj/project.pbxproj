@@ -26,6 +26,7 @@
 		2BAE24801ABD8CA20080E0B3 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE247F1ABD8CA20080E0B3 /* LocationViewController.swift */; };
 		2BAE24821ABD8CBC0080E0B3 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE24811ABD8CBC0080E0B3 /* SettingsTableViewController.swift */; };
 		2BC69E971AC6CB6200F7F614 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC69E961AC6CB6200F7F614 /* WeatherDataModel.swift */; };
+		2BC69E991AC7576300F7F614 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC69E981AC7576200F7F614 /* SwiftyJSON.swift */; };
 		2BF5ED961ABE99420073166A /* UIColor+RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5ED951ABE99420073166A /* UIColor+RGBA.swift */; };
 		3DC0003D3B0605DD6AE8A57B /* libPods-Weather.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39CD8BC96786838EBA230C60 /* libPods-Weather.a */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		2BAE247F1ABD8CA20080E0B3 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		2BAE24811ABD8CBC0080E0B3 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2BC69E961AC6CB6200F7F614 /* WeatherDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
+		2BC69E981AC7576200F7F614 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		2BF5ED951ABE99420073166A /* UIColor+RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBA.swift"; sourceTree = "<group>"; };
 		39CD8BC96786838EBA230C60 /* libPods-Weather.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weather.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6996A36AC7F94B9651EDB9EE /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		2BA78F9F1ABD77AE005E14A8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2BC69E981AC7576200F7F614 /* SwiftyJSON.swift */,
 				2B8FD0601ABD596300265318 /* AppDelegate.swift */,
 				2BA78FA21ABD7F08005E14A8 /* Controllers */,
 				2BA78FA31ABD7F17005E14A8 /* Models */,
@@ -396,6 +399,7 @@
 				2B9EC6781ABE10170008F7FE /* WeatherTableViewCell.swift in Sources */,
 				2BF5ED961ABE99420073166A /* UIColor+RGBA.swift in Sources */,
 				2B8FD0611ABD596300265318 /* AppDelegate.swift in Sources */,
+				2BC69E991AC7576300F7F614 /* SwiftyJSON.swift in Sources */,
 				2BAE24821ABD8CBC0080E0B3 /* SettingsTableViewController.swift in Sources */,
 				2BA78FA61ABD8367005E14A8 /* ForecastTableViewController.swift in Sources */,
 				2BAE24801ABD8CA20080E0B3 /* LocationViewController.swift in Sources */,
