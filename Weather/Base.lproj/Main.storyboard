@@ -233,7 +233,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="[City]" id="P0l-QQ-i9s">
+                    <navigationItem key="navigationItem" id="P0l-QQ-i9s">
                         <barButtonItem key="rightBarButtonItem" image="Location" id="IBN-60-Mol">
                             <connections>
                                 <segue destination="0JW-mv-QjO" kind="presentation" id="xXn-wY-hgb"/>
@@ -517,6 +517,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rwM-NL-Ox8"/>
-        <segue reference="Yz3-ba-bcK"/>
+        <segue reference="xXn-wY-hgb"/>
     </inferredMetricsTieBreakers>
 </document>

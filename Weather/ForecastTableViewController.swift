@@ -9,18 +9,50 @@
 import UIKit
 
 class ForecastTableViewController: UITableViewController {
+    
+    var cachedJson: JSON?
+    
+    var weatherDataModel: WeatherDataModel {
+        get {
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            return appDelegate.weatherDataModel
+        }
+    }
+    
+    // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView?.registerNib(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "weatherCell")
+        self.tableView.registerNib(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "weatherCell")
+        self.tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(animated: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.weatherDataModel.forecastForCurrentLocation {
-            
+        let location: String? = nil
+        self.loadForecast(location) { (json, error) -> Void in
+            if let json = json {
+                self.displayWeather(json)
+            } else {
+                println(error)
+            }
         }
+    }
+    
+    func loadForecast(location: String?, callback: (JSON?, NSError?) -> Void) {
+        if let location = location {
+            self.weatherDataModel.forecastForLocation(location, callback)
+        } else {
+            self.weatherDataModel.forecastForCurrentLocation(callback)
+        }
+    }
+    
+    func displayWeather(json: JSON) {
+        if let city = json["city"]["name"].string {
+            self.navigationItem.title = city
+        }
+        self.cachedJson = json
+        self.tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -30,7 +62,7 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.cachedJson?["list"].array?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -39,6 +71,25 @@ class ForecastTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
+        if let json = self.cachedJson {
+            
+            if let timestamp = json["list"][indexPath.row]["dt"].int {
+                let date = NSDate(timeIntervalSince1970: NSTimeInterval(timestamp))
+                let formatter = NSDateFormatter()
+                formatter.locale = NSLocale(localeIdentifier: "en-GB")
+                formatter.dateFormat = "EEEE"
+                cell.titleLabel.text = formatter.stringFromDate(date)
+            }
+            
+            if let weatherDesc = json["list"][indexPath.row]["weather"][0]["main"].string {
+                cell.conditionLabel.text = weatherDesc
+            }
+            
+            if let temp = json["list"][indexPath.row]["temp"]["day"].float {
+                cell.temparatureLabel.text = "\(Int(round(temp)))°"
+            }
+        }
         return cell
     }
 }
+

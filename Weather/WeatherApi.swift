@@ -62,8 +62,28 @@ class WeatherApi: NSObject {
         sendRequest(request, callback: callback)
     }
     
+    func forecastWeatherByCityId(cityId: String, callback: (JSON?, NSError?) -> Void) {
+        let request = "forecast?id=\(cityId)"
+        sendRequest(request, callback: callback)
+    }
+    
     func forecastWeatherByCoordinate(coord: CLLocationCoordinate2D, callback: (JSON?, NSError?) -> Void) {
         let request = "forecast?lat=\(coord.latitude)&lon=\(coord.longitude)"
+        sendRequest(request, callback: callback)
+    }
+    
+    func dailyForecastWeatherByCityName(cityName: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
+        let request = "forecast/daily?q=\(cityName)&cnt=\(days)"
+        sendRequest(request, callback: callback)
+    }
+    
+    func dailyForecastWeatherByCityId(cityId: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
+        let request = "forecast/daily?id=\(cityId)&cnt=\(days)"
+        sendRequest(request, callback: callback)
+    }
+    
+    func dailyForecastWeatherByCoordinate(coord: CLLocationCoordinate2D, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
+        let request = "forecast/daily?lat=\(coord.latitude)&lon=\(coord.longitude)&cnt=\(days)"
         sendRequest(request, callback: callback)
     }
 }

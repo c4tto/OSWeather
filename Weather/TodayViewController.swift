@@ -19,6 +19,14 @@ class TodayViewController: UIViewController {
     @IBOutlet var windDirectionLabel: UILabel!
     @IBOutlet var windSpeedLabel: UILabel!
     
+    var weatherDataModel: WeatherDataModel {
+        get {
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            return appDelegate.weatherDataModel
+        }
+    }
+
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,22 +39,18 @@ class TodayViewController: UIViewController {
         self.loadWeather(location) { (json, error) -> Void in
             if let json = json {
                 self.displayWeather(json)
+            } else {
+                println(error)
             }
         }
     }
     
     func loadWeather(location: String?, callback: (JSON?, NSError?) -> Void) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.weatherDataModel.weatherForCurrentLocation { (json, error) -> Void in
-            callback(json, error)
-        }
-        /*
-        if let name = location {
-            appDelegate.weatherDataModel.weatherForLocationWithName(name, callback)
+        if let location = location {
+            self.weatherDataModel.weatherForLocation(location, callback)
         } else {
-            appDelegate.weatherDataModel.weatherForCurrentLocation(callback)
+            self.weatherDataModel.weatherForCurrentLocation(callback)
         }
-        */
     }
     
     func displayWeather(json: JSON) {
@@ -59,12 +63,12 @@ class TodayViewController: UIViewController {
             self.weatherDescLabel.text = weatherDesc
         }
         if let temp = json["main"]["temp"].float {
-            self.temperatureLabel.text = "\(Int(round(temp))) \(self.temperatureUnit())"
+            self.temperatureLabel.text = "\(Int(round(temp)))\(self.weatherDataModel.temperatureUnit)"
         }
         if let humidity = json["main"]["humidity"].int {
             self.humidityLabel.text = "\(humidity) %"
         }
-        if let rain = json["rain"]["1h"].float ?? json["rain"]["3h"].float {
+        if let rain = json["rain"]["1h"].float ?? json["rain"]["3h"].float ?? 0.0 {
             let rainString = String(format: "%.1f", rain)
             self.rainLabel.text = "\(rainString) mm"
         }
@@ -75,12 +79,8 @@ class TodayViewController: UIViewController {
             self.windDirectionLabel.text = self.windDirectionDescription(windDeg)
         }
         if let windSpeed = json["wind"]["speed"].float {
-            self.windSpeedLabel.text = "\(Int(round(windSpeed))) km/h"
+            self.windSpeedLabel.text = "\(Int(round(windSpeed)))\(self.weatherDataModel.speedUnit)"
         }
-    }
-    
-    func temperatureUnit() -> String {
-        return "°C" // "°F", "K"
     }
     
     func windDirectionDescription(windDeg: Float) -> String? {

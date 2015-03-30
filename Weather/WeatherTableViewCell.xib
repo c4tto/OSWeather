@@ -28,27 +28,31 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sun" translatesAutoresizingMaskIntoConstraints="NO" id="YEv-qE-DsQ">
                         <rect key="frame" x="12" y="18" width="50" height="50"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saturday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffN-vk-7Tv" userLabel="Title Label">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffN-vk-7Tv" userLabel="Title Label">
                         <rect key="frame" x="85" y="25" width="139" height="21"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="18"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sunny" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otk-Xb-Bor" userLabel="Condition Label">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otk-Xb-Bor" userLabel="Condition Label">
                         <rect key="frame" x="85" y="48" width="139" height="21"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGC-vb-ydq" userLabel="Temperature Value">
-                        <rect key="frame" x="232" y="22" width="80" height="55"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGC-vb-ydq" userLabel="Temperature Value">
+                        <rect key="frame" x="179" y="24" width="133" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="133" id="POA-gk-eax"/>
+                            <constraint firstAttribute="height" constant="55" id="pbv-pn-bJc"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="55"/>
                         <color key="textColor" red="0.18431372549019609" green="0.56862745098039214" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="centerY" secondItem="TGC-vb-ydq" secondAttribute="centerY" constant="-8.5" id="TKA-II-B9j"/>
+                    <constraint firstAttribute="centerY" secondItem="TGC-vb-ydq" secondAttribute="centerY" constant="-10" id="TKA-II-B9j"/>
                     <constraint firstItem="TGC-vb-ydq" firstAttribute="trailing" secondItem="d6X-0d-DVR" secondAttribute="trailingMargin" id="miW-UF-wlA"/>
                     <constraint firstItem="YEv-qE-DsQ" firstAttribute="leading" secondItem="d6X-0d-DVR" secondAttribute="leadingMargin" constant="4" id="pca-Bz-gfb"/>
                     <constraint firstAttribute="centerY" secondItem="YEv-qE-DsQ" secondAttribute="centerY" constant="-2" id="zcI-U1-Ucm"/>
@@ -61,7 +65,7 @@
                 <outlet property="titleLabel" destination="ffN-vk-7Tv" id="C0X-F3-Yxv"/>
                 <outlet property="weatherImageView" destination="YEv-qE-DsQ" id="LKz-it-f2H"/>
             </connections>
-            <point key="canvasLocation" x="319" y="22.5"/>
+            <point key="canvasLocation" x="319" y="20.5"/>
         </tableViewCell>
     </objects>
     <resources>
