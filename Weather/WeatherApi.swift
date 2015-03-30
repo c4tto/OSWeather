@@ -24,6 +24,9 @@ class WeatherApi: NSObject {
     
     var units: WeatherApiUnits = .Metric
     
+    var cache: [String: (date: NSDate, json: JSON)] = [:]
+    var cacheExpirationInterval: NSTimeInterval = 10 * 60
+    
     init(apiId: String) {
         self.apiId = apiId
         super.init()
@@ -32,11 +35,21 @@ class WeatherApi: NSObject {
     func sendRequest(request: String, callback: (JSON?, NSError?) -> Void) {
         let langString = language != nil ? "&lang=\(language)" : ""
         let unitsString = units == .Metric ? "&units=metric" : "&units=imperial"
-        let url = "\(baseUrl)/\(apiVersion)/\(request)&APPIID=\(apiId)\(langString)\(unitsString)"
+        let url = "\(baseUrl)/\(apiVersion)/\(request)\(langString)\(unitsString)&APPIID=\(apiId)"
+        
+        if let cachedResult = self.cache[url] {
+            if cachedResult.date.timeIntervalSinceNow > -self.cacheExpirationInterval {
+                callback(cachedResult.json, nil)
+                return
+            }
+        }
+        
         manager.GET(url, parameters: nil,
             success: { (operation, response) -> Void in
                 println(response.description)
-                callback(JSON(response), nil)
+                let json = JSON(response)
+                self.cache[url] = (date: NSDate(), json)
+                callback(json, nil)
             }, failure: { (operation, error) -> Void in
                 callback(nil, error)
             })

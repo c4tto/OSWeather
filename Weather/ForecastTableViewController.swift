@@ -71,6 +71,7 @@ class ForecastTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
+        
         if let json = self.cachedJson {
             
             if let timestamp = json["list"][indexPath.row]["dt"].int {
