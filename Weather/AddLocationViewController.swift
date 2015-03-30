@@ -7,34 +7,66 @@
 //
 
 import UIKit
+import MapKit
 
-class AddLocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AddLocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate {
     
-    @IBOutlet var closeBarButtonItem: UIBarButtonItem?
+    @IBOutlet var closeBarButtonItem: UIBarButtonItem!
+    
+    var mapItems: [MKMapItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.searchDisplayController?.displaysSearchBarInNavigationBar = true
         self.searchDisplayController?.navigationItem.rightBarButtonItem = closeBarButtonItem
+        self.searchDisplayController?.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(animated: Bool) {
         self.searchDisplayController?.searchBar.becomeFirstResponder()
     }
     
-    // MARK: - Tablew View Data Source
+    // MARK: - Table View Data Source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.mapItems.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        let mapItem = self.mapItems[indexPath.row]
+        cell.textLabel?.text = "\(mapItem.placemark.locality), \(mapItem.placemark.country)"
         return cell
+    }
+    
+    // MARK: - Table View Delegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("did select row \(indexPath.row)")
+    }
+    
+    // MARK: - Search Display Controller Delegate
+    
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = searchString
+        let search = MKLocalSearch(request: request)
+        search.startWithCompletionHandler { (response, error) -> Void in
+            if let response = response {
+                //let predicate = NSPredicate(format: "business.uID == 0")
+                let mapItems = response.mapItems as [MKMapItem]
+                self.mapItems = mapItems.filter { (mapItem) -> Bool in
+                    return mapItem.placemark.locality != nil
+                }
+                controller.searchResultsTableView.reloadData()
+            }
+        }
+        return false
     }
 }

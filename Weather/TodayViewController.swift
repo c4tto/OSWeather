@@ -79,7 +79,7 @@ class TodayViewController: UIViewController {
             self.windDirectionLabel.text = self.windDirectionDescription(windDeg)
         }
         if let windSpeed = json["wind"]["speed"].float {
-            self.windSpeedLabel.text = "\(Int(round(windSpeed)))\(self.weatherDataModel.speedUnit)"
+            self.windSpeedLabel.text = "\(Int(round(windSpeed))) \(self.weatherDataModel.speedUnit)"
         }
     }
     
