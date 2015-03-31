@@ -36,13 +36,12 @@ class WeatherDataModel: NSObject {
         return self.weatherApi.units == .Metric ? "m/s" : "ft/s"
     }
     
-    private func currentLocation(callback: (String?, NSError?) -> Void) {
+    private func currentLocation(callback: (CLPlacemark?, NSError?) -> Void) {
         self.locationManager.startUpdatingLocationWithUpdateBlock { (manager, location, error, stopUpdating) -> Void in
             if let location = location {
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
                     if let placemark = placemarks[0] as? CLPlacemark {
-                        let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                        callback(location, error)
+                        callback(placemark, error)
                     } else {
                         callback(nil, error)
                     }
@@ -58,26 +57,32 @@ class WeatherDataModel: NSObject {
         self.weatherApi.currentWeatherByCityName(location, callback)
     }
     
-    func weatherForCurrentLocation(callback: (JSON?, NSError?) -> Void) {
-        self.currentLocation { (location, error) -> Void in
-            if let location = location {
-                self.weatherForLocation(location, callback)
+    func weatherForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
+        self.currentLocation { (placemark, error) -> Void in
+            if let placemark = placemark {
+                let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
+                self.weatherForLocation(location) { (json, error) -> Void in
+                    callback(placemark, json, error)
+                }
             } else {
-                callback(nil, error);
+                callback(nil, nil, error);
             }
         }
     }
     
     func forecastForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
-        self.weatherApi.dailyForecastWeatherByCityName(location, forDays: numberOfForecastedDays, callback)
+        self.weatherApi.dailyForecastWeatherByCityName(location, forDays: self.numberOfForecastedDays, callback)
     }
     
-    func forecastForCurrentLocation(callback: (JSON?, NSError?) -> Void) {
-        self.currentLocation { (location, error) -> Void in
-            if let location = location {
-                self.forecastForLocation(location, callback)
+    func forecastForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
+        self.currentLocation { (placemark, error) -> Void in
+            if let placemark = placemark {
+                let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
+                self.forecastForLocation(location) { (json, error) -> Void in
+                    callback(placemark, json, error)
+                }
             } else {
-                callback(nil, error)
+                callback(nil, nil, error)
             }
         }
     }

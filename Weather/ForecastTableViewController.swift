@@ -24,19 +24,24 @@ class ForecastTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.weatherDataModel.forecastForCurrentLocation { (json, error) -> Void in
+        self.weatherDataModel.forecastForCurrentLocation { (placemark, json, error) -> Void in
+            if let placemark = placemark {
+                self.displayLocation(placemark)
+            }
             if let json = json {
                 self.displayWeather(json)
-            } else {
+            }
+            if let error = error {
                 println(error)
             }
         }
     }
     
+    func displayLocation(placemark: CLPlacemark) {
+        self.navigationItem.title = placemark.locality
+    }
+    
     func displayWeather(json: JSON) {
-        if let city = json["city"]["name"].string {
-            self.navigationItem.title = city
-        }
         self.cachedJson = json
         self.tableView.reloadData()
     }
@@ -63,7 +68,6 @@ class ForecastTableViewController: UITableViewController {
             if let timestamp = json["list"][indexPath.row]["dt"].int {
                 let date = NSDate(timeIntervalSince1970: NSTimeInterval(timestamp))
                 let formatter = NSDateFormatter()
-                formatter.locale = NSLocale(localeIdentifier: "en-GB")
                 formatter.dateFormat = "EEEE"
                 cell.titleLabel.text = formatter.stringFromDate(date)
             }

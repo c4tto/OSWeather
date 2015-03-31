@@ -28,21 +28,24 @@ class TodayViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.weatherDataModel.weatherForCurrentLocation { (json, error) -> Void in
+        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) -> Void in
+            if let placemark = placemark {
+                self.displayLocation(placemark)
+            }
             if let json = json {
                 self.displayWeather(json)
-            } else {
+            }
+            if let error = error {
                 println(error)
             }
         }
     }
     
+    func displayLocation(placemark: CLPlacemark) {
+        self.localityLabel.text = "\(placemark.locality), \(placemark.country)"
+    }
+    
     func displayWeather(json: JSON) {
-        if let city = json["name"].string {
-            if let country = json["sys"]["country"].string {
-                self.localityLabel.text = "\(city), \(country)"
-            }
-        }
         if let weatherDesc = json["weather"][0]["main"].string {
             self.weatherDescLabel.text = weatherDesc
         }
