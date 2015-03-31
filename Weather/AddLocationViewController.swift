@@ -49,6 +49,7 @@ class AddLocationViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let placemark = self.mapItems[indexPath.row].placemark
         self.weatherDataModel.addLocationWithName(placemark.locality, country: placemark.country, countryCode: placemark.countryCode)
+        self.performSegueWithIdentifier("dismissAddLocation", sender: self)
     }
     
     // MARK: - Search Display Controller Delegate
@@ -60,7 +61,6 @@ class AddLocationViewController: UIViewController, UITableViewDataSource, UITabl
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler { (response, error) -> Void in
             if let response = response {
-                //let predicate = NSPredicate(format: "business.uID == 0")
                 let mapItems = response.mapItems as [MKMapItem]
                 self.mapItems = mapItems.filter { (mapItem) -> Bool in
                     return mapItem.placemark.locality != nil

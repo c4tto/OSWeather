@@ -443,7 +443,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9I-aU-ali" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Close" id="HVh-GJ-Mbc">
                     <connections>
-                        <segue destination="aqs-h2-9xX" kind="custom" customClass="DismissSegue" customModule="Weather" id="rwM-NL-Ox8"/>
+                        <segue destination="aqs-h2-9xX" kind="custom" identifier="dismissAddLocation" customClass="DismissSegue" customModule="Weather" id="rwM-NL-Ox8"/>
                     </connections>
                 </barButtonItem>
                 <searchBar contentMode="redraw" searchBarStyle="prominent" id="A9w-br-QRn">
