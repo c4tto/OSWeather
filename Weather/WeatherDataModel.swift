@@ -16,23 +16,13 @@ class WeatherDataModel: NSObject {
     
     var temperatureUnit: String {
         get {
-            return self.weatherApi.units == .Metric ? "°C" : "°F" // "K"
+            return self.weatherApi.units == .Metric ? "°C" : "°F"
         }
     }
     
     var speedUnit: String {
         get {
             return self.weatherApi.units == .Metric ? "m/s" : "ft/s"
-        }
-    }
-    
-    override init() {
-        super.init()
-        
-        if CLLocationManager.isLocationUpdatesAvailable() {
-            println("location available")
-        } else {
-            println("UNAVAILABLE")
         }
     }
     
