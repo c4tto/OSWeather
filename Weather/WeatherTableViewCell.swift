@@ -14,4 +14,11 @@ class WeatherTableViewCell: UITableViewCell {
     @IBOutlet var conditionLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var weatherImageView: UIImageView!
+    
+    override func prepareForReuse() {
+        self.titleLabel.text = "------"
+        self.conditionLabel.text = "------"
+        self.temperatureLabel.text = "----"
+        self.weatherImageView.image = nil
+    }
 }

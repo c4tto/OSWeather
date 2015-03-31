@@ -25,17 +25,23 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZKw-IF-4wp" id="d6X-0d-DVR">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sun" translatesAutoresizingMaskIntoConstraints="NO" id="YEv-qE-DsQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YEv-qE-DsQ">
                         <rect key="frame" x="12" y="18" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="MLa-b2-JNy"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffN-vk-7Tv" userLabel="Title Label">
-                        <rect key="frame" x="85" y="25" width="139" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffN-vk-7Tv" userLabel="Title Label">
+                        <rect key="frame" x="85" y="28" width="139" height="18"/>
                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="18"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otk-Xb-Bor" userLabel="Condition Label">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="------" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otk-Xb-Bor" userLabel="Condition Label">
                         <rect key="frame" x="85" y="48" width="139" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="6Ih-rH-UBh"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -52,9 +58,16 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="otk-Xb-Bor" secondAttribute="bottom" constant="5" id="0Ve-CO-dag"/>
+                    <constraint firstItem="otk-Xb-Bor" firstAttribute="leading" secondItem="YEv-qE-DsQ" secondAttribute="trailing" constant="23" id="6G8-yO-oND"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="otk-Xb-Bor" secondAttribute="trailing" constant="88" id="Kf9-ry-b4K"/>
+                    <constraint firstItem="otk-Xb-Bor" firstAttribute="trailing" secondItem="ffN-vk-7Tv" secondAttribute="trailing" id="SxO-3O-xAL"/>
                     <constraint firstAttribute="centerY" secondItem="TGC-vb-ydq" secondAttribute="centerY" constant="-10" id="TKA-II-B9j"/>
+                    <constraint firstItem="otk-Xb-Bor" firstAttribute="leading" secondItem="ffN-vk-7Tv" secondAttribute="leading" id="d5n-yA-aFk"/>
                     <constraint firstItem="TGC-vb-ydq" firstAttribute="trailing" secondItem="d6X-0d-DVR" secondAttribute="trailingMargin" id="miW-UF-wlA"/>
+                    <constraint firstItem="otk-Xb-Bor" firstAttribute="top" secondItem="ffN-vk-7Tv" secondAttribute="bottom" constant="2" id="ozD-Uq-Q6h"/>
                     <constraint firstItem="YEv-qE-DsQ" firstAttribute="leading" secondItem="d6X-0d-DVR" secondAttribute="leadingMargin" constant="4" id="pca-Bz-gfb"/>
+                    <constraint firstItem="YEv-qE-DsQ" firstAttribute="top" secondItem="d6X-0d-DVR" secondAttribute="topMargin" constant="10" id="vM7-QC-uCG"/>
                     <constraint firstAttribute="centerY" secondItem="YEv-qE-DsQ" secondAttribute="centerY" constant="-2" id="zcI-U1-Ucm"/>
                 </constraints>
             </tableViewCellContentView>
@@ -68,7 +81,4 @@
             <point key="canvasLocation" x="319" y="20.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Sun" width="50" height="50"/>
-    </resources>
 </document>
