@@ -64,8 +64,17 @@ class WeatherApi: NSObject {
     }
     
     func currentWeatherForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
-        let request = "weather?q=\(location)"
+        let asciiData = location.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+        let nsString = NSString(data: asciiData!, encoding: NSASCIIStringEncoding);
+        let escapedLocation = nsString!.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!
+        let request = "weather?q=\(escapedLocation)"
         sendRequest(request, callback: callback);
+    }
+    
+    func currentWeatherForLocationIds(locationIds: [UInt], callback: (JSON?, NSError?) -> Void) {
+        let idString = ",".join(locationIds.map {id in id.description})
+        let request = "group?id=\(idString)"
+        sendRequest(request, callback: callback)
     }
     
     func dailyForecastWeatherForLocation(location: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {

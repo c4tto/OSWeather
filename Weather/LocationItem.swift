@@ -12,5 +12,6 @@ import CoreData
 class LocationItem: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var country: String
-    @NSManaged var countryCode: String
+    @NSManaged var isoCountryCode: String
+    @NSManaged var weatherApiId: UInt
 }

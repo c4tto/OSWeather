@@ -44,7 +44,7 @@ class LocationCoreDataModel: NSObject {
         let newItem = NSEntityDescription.insertNewObjectForEntityForName(itemName, inManagedObjectContext: self.managedObjectContext) as LocationItem
         newItem.name = name
         newItem.country = country
-        newItem.countryCode = countryCode
+        newItem.isoCountryCode = countryCode
         self.saveContext()
         _items = nil
     }

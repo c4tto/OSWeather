@@ -13,6 +13,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var tableView: UITableView!
     
     var cachedCurrentLocationData: (placemark: CLPlacemark?, json: JSON?)?
+    var cachedStoredLocationsJson: JSON?
+    var cachedNewlyAddedLocationJson: JSON?
     
     // MARK: - View Lifecycle
     
@@ -34,7 +36,31 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         self.weatherDataModel.weatherForStoredLocations { (json, error) in
+            self.cachedStoredLocationsJson = json
+            self.tableView.reloadData()
         }
+        
+        self.weatherDataModel.weatherForNewlyStoredLocation { (json, error) in
+            self.cachedNewlyAddedLocationJson = json
+            self.tableView.reloadData()
+        }
+    }
+    
+    func cachedJsonForLocationWithId(locationId: UInt) -> JSON? {
+        if let json = self.cachedStoredLocationsJson {
+            for subjson in json["list"].arrayValue {
+                if subjson["id"].uInt == locationId {
+                    return subjson
+                }
+            }
+        }
+        if let json = self.cachedNewlyAddedLocationJson {
+            if json["id"].uInt == locationId {
+                self.cachedNewlyAddedLocationJson = nil
+                return json
+            }
+        }
+        return nil;
     }
     
     // MARK: - Table view data source
@@ -73,8 +99,15 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             let locationItem = self.weatherDataModel.locations[indexPath.row]
             cell.titleLabel.text = locationItem.name
-            //cell.conditionLabel.text = "Sunny"
-            //cell.temparatureLabel.text = "25"
+        
+            if let json = self.cachedJsonForLocationWithId(locationItem.weatherApiId) {
+                if let condition = json["weather"][0]["main"].string {
+                    cell.conditionLabel.text = condition
+                }
+                if let temp = json["main"]["temp"].float {
+                    cell.temperatureLabel.text = "\(Int(round(temp)))°"
+                }
+            }
         }
         
         return cell
