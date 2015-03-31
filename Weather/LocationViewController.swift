@@ -56,7 +56,6 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         if let json = self.cachedNewlyAddedLocationJson {
             if json["id"].uInt == locationId {
-                self.cachedNewlyAddedLocationJson = nil
                 return json
             }
         }

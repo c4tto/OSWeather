@@ -56,8 +56,8 @@ class WeatherDataModel: NSObject {
     func weatherForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
         self.currentLocation { (placemark, error) in
             if let placemark = placemark {
-                //let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                self.weatherApi.currentWeatherForLocation(placemark.locality) { (json, error) in
+                let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
+                self.weatherApi.currentWeatherForLocation(location) { (json, error) in
                     callback(placemark, json, error)
                 }
             } else {
@@ -69,8 +69,8 @@ class WeatherDataModel: NSObject {
     func forecastForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
         self.currentLocation { (placemark, error) -> Void in
             if let placemark = placemark {
-                //let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                self.weatherApi.dailyForecastWeatherForLocation(placemark.locality, forDays: self.numberOfForecastedDays) { (json, error) in
+                let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
+                self.weatherApi.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays) { (json, error) in
                     callback(placemark, json, error)
                 }
             } else {
@@ -83,8 +83,8 @@ class WeatherDataModel: NSObject {
         let locationItemsWithoutId = self.locations.filter {$0.weatherApiId == 0}
         if locationItemsWithoutId.count > 0 {
             for locationItem in locationItemsWithoutId {
-                //let location = "\(locationItem.name),\(locationItem.isoCountryCode)"
-                self.weatherApi.currentWeatherForLocation(locationItem.name) { (json, error) in
+                let location = "\(locationItem.name),\(locationItem.isoCountryCode)"
+                self.weatherApi.currentWeatherForLocation(location) { (json, error) in
                     if let json = json {
                         if let locationId = json["id"].uInt {
                             locationItem.weatherApiId = locationId
