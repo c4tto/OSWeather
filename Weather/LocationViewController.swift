@@ -10,7 +10,7 @@ import UIKit
 
 class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet var tableView: UITableView?
+    @IBOutlet var tableView: UITableView!
     
     var cachedCurrentLocationData: (placemark: CLPlacemark?, json: JSON?)?
     
@@ -19,20 +19,21 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView?.registerNib(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "weatherCell")
+        self.tableView.registerNib(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "weatherCell")
+        self.tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView?.reloadData()
+        self.tableView.reloadData()
         
         self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) in
             self.cachedCurrentLocationData = (placemark: placemark, json: json)
-            self.tableView?.reloadData()
+            self.tableView.reloadData()
         }
         
-        self.weatherDataModel.weatherForStoredLocations { (json, error) -> Void in
+        self.weatherDataModel.weatherForStoredLocations { (json, error) in
         }
     }
     
