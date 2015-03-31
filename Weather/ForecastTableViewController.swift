@@ -24,7 +24,7 @@ class ForecastTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.weatherDataModel.forecastForCurrentLocation { (placemark, json, error) -> Void in
+        self.weatherDataModel.forecastForCurrentLocation { (placemark, json, error) in
             if let placemark = placemark {
                 self.displayLocation(placemark)
             }

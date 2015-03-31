@@ -54,14 +54,14 @@ class WeatherDataModel: NSObject {
     }
     
     func weatherForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
-        self.weatherApi.currentWeatherByCityName(location, callback)
+        self.weatherApi.currentWeatherForLocation(location, callback)
     }
     
     func weatherForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
-        self.currentLocation { (placemark, error) -> Void in
+        self.currentLocation { (placemark, error) in
             if let placemark = placemark {
                 let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                self.weatherForLocation(location) { (json, error) -> Void in
+                self.weatherForLocation(location) { (json, error) in
                     callback(placemark, json, error)
                 }
             } else {
@@ -71,14 +71,14 @@ class WeatherDataModel: NSObject {
     }
     
     func forecastForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
-        self.weatherApi.dailyForecastWeatherByCityName(location, forDays: self.numberOfForecastedDays, callback)
+        self.weatherApi.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays, callback)
     }
     
     func forecastForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
         self.currentLocation { (placemark, error) -> Void in
             if let placemark = placemark {
                 let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                self.forecastForLocation(location) { (json, error) -> Void in
+                self.forecastForLocation(location) { (json, error) in
                     callback(placemark, json, error)
                 }
             } else {
@@ -88,7 +88,12 @@ class WeatherDataModel: NSObject {
     }
     
     func weatherForStoredLocations((JSON?, NSError?) -> Void) {
-        println("weather for stored locations")
+        
+        for item in self.locations {/*
+            let location = "\(item.name),\(item.countryCode)"
+            self.forecastForLocation(location) { (json, error) in
+            }*/
+        }
     }
     
     func addLocationWithName(name: String, country: String, countryCode: String) {

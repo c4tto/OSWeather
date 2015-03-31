@@ -59,10 +59,10 @@ class AddLocationViewController: UIViewController, UITableViewDataSource, UITabl
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchString
         let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler { (response, error) -> Void in
+        search.startWithCompletionHandler { (response, error) in
             if let response = response {
                 let mapItems = response.mapItems as [MKMapItem]
-                self.mapItems = mapItems.filter { (mapItem) -> Bool in
+                self.mapItems = mapItems.filter { (mapItem) in
                     return mapItem.placemark.locality != nil
                 }
                 controller.searchResultsTableView.reloadData()

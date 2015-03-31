@@ -28,7 +28,7 @@ class TodayViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) -> Void in
+        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) in
             if let placemark = placemark {
                 self.displayLocation(placemark)
             }

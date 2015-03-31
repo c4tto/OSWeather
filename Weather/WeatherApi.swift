@@ -63,48 +63,13 @@ class WeatherApi: NSObject {
             })
     }
     
-    func currentWeatherByCityName(cityName: String, callback: (JSON?, NSError?) -> Void) {
-        let request = "weather?q=\(cityName)"
+    func currentWeatherForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
+        let request = "weather?q=\(location)"
         sendRequest(request, callback: callback);
     }
     
-    func currentWeatherByCityId(cityId: String, callback: (JSON?, NSError?) -> Void) {
-        let request = "weather?id=\(cityId)"
-        sendRequest(request, callback: callback);
-    }
-    
-    func currentWeatherByCoordinate(coord: CLLocationCoordinate2D, callback: (JSON?, NSError?) -> Void) {
-        let request = "weather?lat=\(coord.latitude)&lon=\(coord.longitude)"
-        sendRequest(request, callback: callback)
-    }
-    
-    func forecastWeatherByCityName(cityName: String, callback: (JSON?, NSError?) -> Void) {
-        let request = "forecast?q=\(cityName)"
-        sendRequest(request, callback: callback)
-    }
-    
-    func forecastWeatherByCityId(cityId: String, callback: (JSON?, NSError?) -> Void) {
-        let request = "forecast?id=\(cityId)"
-        sendRequest(request, callback: callback)
-    }
-    
-    func forecastWeatherByCoordinate(coord: CLLocationCoordinate2D, callback: (JSON?, NSError?) -> Void) {
-        let request = "forecast?lat=\(coord.latitude)&lon=\(coord.longitude)"
-        sendRequest(request, callback: callback)
-    }
-    
-    func dailyForecastWeatherByCityName(cityName: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
-        let request = "forecast/daily?q=\(cityName)&cnt=\(days)"
-        sendRequest(request, callback: callback)
-    }
-    
-    func dailyForecastWeatherByCityId(cityId: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
-        let request = "forecast/daily?id=\(cityId)&cnt=\(days)"
-        sendRequest(request, callback: callback)
-    }
-    
-    func dailyForecastWeatherByCoordinate(coord: CLLocationCoordinate2D, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
-        let request = "forecast/daily?lat=\(coord.latitude)&lon=\(coord.longitude)&cnt=\(days)"
+    func dailyForecastWeatherForLocation(location: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
+        let request = "forecast/daily?q=\(location)&cnt=\(days)"
         sendRequest(request, callback: callback)
     }
 }

@@ -27,7 +27,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.tableView?.reloadData()
         
-        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) -> Void in
+        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) in
             self.cachedCurrentLocationData = (placemark: placemark, json: json)
             self.tableView?.reloadData()
         }
