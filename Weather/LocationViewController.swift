@@ -83,32 +83,32 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
         
+        var locationName: String? = nil
+        var json: JSON? = nil
         if indexPath.section == 0 {
             if let placemark = self.cachedCurrentLocationData?.placemark {
-                cell.titleLabel.text = placemark.locality
+                locationName = placemark.locality
             }
-            if let json = self.cachedCurrentLocationData?.json {
-                if let condition = json["weather"][0]["main"].string {
-                    cell.conditionLabel.text = condition
-                }
-                if let temp = json["main"]["temp"].float {
-                    cell.temperatureLabel.text = "\(Int(round(temp)))°"
-                }
-            }
+            json = self.cachedCurrentLocationData?.json
         } else {
             let locationItem = self.weatherDataModel.locations[indexPath.row]
-            cell.titleLabel.text = locationItem.name
-        
-            if let json = self.cachedJsonForLocationWithId(locationItem.weatherApiId) {
-                if let condition = json["weather"][0]["main"].string {
-                    cell.conditionLabel.text = condition
-                }
-                if let temp = json["main"]["temp"].float {
-                    cell.temperatureLabel.text = "\(Int(round(temp)))°"
-                }
-            }
+            locationName = locationItem.name
+            json = self.cachedJsonForLocationWithId(locationItem.weatherApiId)
         }
         
+        if let locationName = locationName {
+            cell.titleLabel.text = locationName
+        }
+        
+        if let json = json {
+            if let condition = json["weather"][0]["main"].string {
+                cell.conditionLabel.text = condition
+            }
+            if let temp = json["main"]["temp"].float {
+                cell.temperatureLabel.text = "\(Int(round(temp)))°"
+            }
+        }
+
         return cell
     }
 
@@ -122,19 +122,4 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }    
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }
