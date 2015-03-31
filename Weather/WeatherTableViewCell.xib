@@ -61,7 +61,7 @@
             <inset key="separatorInset" minX="85" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="conditionLabel" destination="otk-Xb-Bor" id="W9v-TE-uoy"/>
-                <outlet property="temparatureLabel" destination="TGC-vb-ydq" id="6ax-qu-vvC"/>
+                <outlet property="temperatureLabel" destination="TGC-vb-ydq" id="SvP-rK-E7N"/>
                 <outlet property="titleLabel" destination="ffN-vk-7Tv" id="C0X-F3-Yxv"/>
                 <outlet property="weatherImageView" destination="YEv-qE-DsQ" id="LKz-it-f2H"/>
             </connections>

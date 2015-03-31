@@ -12,7 +12,7 @@ class TodayViewController: UIViewController {
     
     @IBOutlet var localityLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
-    @IBOutlet var weatherDescLabel: UILabel!
+    @IBOutlet var conditionLabel: UILabel!
     @IBOutlet var humidityLabel: UILabel!
     @IBOutlet var rainLabel: UILabel!
     @IBOutlet var pressureLabel: UILabel!
@@ -46,8 +46,8 @@ class TodayViewController: UIViewController {
     }
     
     func displayWeather(json: JSON) {
-        if let weatherDesc = json["weather"][0]["main"].string {
-            self.weatherDescLabel.text = weatherDesc
+        if let condition = json["weather"][0]["main"].string {
+            self.conditionLabel.text = condition
         }
         if let temp = json["main"]["temp"].float {
             self.temperatureLabel.text = "\(Int(round(temp)))\(self.weatherDataModel.temperatureUnit)"

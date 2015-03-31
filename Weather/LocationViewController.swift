@@ -12,6 +12,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet var tableView: UITableView?
     
+    var cachedCurrentLocationData: (placemark: CLPlacemark?, json: JSON?)?
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -24,6 +26,11 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         
         self.tableView?.reloadData()
+        
+        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) -> Void in
+            self.cachedCurrentLocationData = (placemark: placemark, json: json)
+            self.tableView?.reloadData()
+        }
         
         self.weatherDataModel.weatherForStoredLocations { (json, error) -> Void in
         }
@@ -51,7 +58,17 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
         
         if indexPath.section == 0 {
-            
+            if let placemark = self.cachedCurrentLocationData?.placemark {
+                cell.titleLabel.text = placemark.locality
+            }
+            if let json = self.cachedCurrentLocationData?.json {
+                if let condition = json["weather"][0]["main"].string {
+                    cell.conditionLabel.text = condition
+                }
+                if let temp = json["main"]["temp"].float {
+                    cell.temperatureLabel.text = "\(Int(round(temp)))°"
+                }
+            }
         } else {
             let locationItem = self.weatherDataModel.locations[indexPath.row]
             cell.titleLabel.text = locationItem.name

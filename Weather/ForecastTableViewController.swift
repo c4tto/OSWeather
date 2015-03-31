@@ -77,7 +77,7 @@ class ForecastTableViewController: UITableViewController {
             }
             
             if let temp = json["list"][indexPath.row]["temp"]["day"].float {
-                cell.temparatureLabel.text = "\(Int(round(temp)))°"
+                cell.temperatureLabel.text = "\(Int(round(temp)))°"
             }
         }
         return cell

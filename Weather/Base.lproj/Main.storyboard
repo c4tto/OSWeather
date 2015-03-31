@@ -187,12 +187,12 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="conditionLabel" destination="c48-LM-xfh" id="zNB-xM-tvZ"/>
                         <outlet property="humidityLabel" destination="1Rl-qf-hOq" id="85N-7Z-qYx"/>
                         <outlet property="localityLabel" destination="VDM-rC-7pD" id="CSA-lz-Bl0"/>
                         <outlet property="pressureLabel" destination="f2C-mn-k5c" id="GoS-al-2Gc"/>
                         <outlet property="rainLabel" destination="M34-B2-gSv" id="VLH-nX-gKz"/>
                         <outlet property="temperatureLabel" destination="Hnv-Ng-ZZL" id="oiW-az-nlk"/>
-                        <outlet property="weatherDescLabel" destination="c48-LM-xfh" id="VmM-Bn-eXT"/>
                         <outlet property="windDirectionLabel" destination="d98-Nb-Jsd" id="ttY-cy-nAT"/>
                         <outlet property="windSpeedLabel" destination="fGp-SA-KYb" id="VnP-Fe-cO0"/>
                     </connections>

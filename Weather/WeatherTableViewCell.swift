@@ -12,6 +12,6 @@ class WeatherTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var conditionLabel: UILabel!
-    @IBOutlet var temparatureLabel: UILabel!
+    @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var weatherImageView: UIImageView!
 }
