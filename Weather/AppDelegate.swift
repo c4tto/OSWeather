@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(application: UIApplication) {
-        self.saveContext()
     }
     
     // MARK: - Core Data stack
@@ -100,10 +99,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // MARK: - Weather Data Model
+    // MARK: - Data Models
     
     lazy var weatherDataModel: WeatherDataModel = {
-        return WeatherDataModel()
+        return WeatherDataModel(weatherApi: self.weatherApi, locationCoreDataModel: self.locationCoreDataModel)
+    }()
+    
+    lazy var weatherApi = WeatherApi(apiId: "3b9e5a5284eaa6be66f5cceb016b5471")
+    
+    lazy var locationCoreDataModel: LocationCoreDataModel? = {
+        if let moc = self.managedObjectContext {
+            return LocationCoreDataModel(managedObjectContext: moc)
+        } else {
+            return nil
+        }
     }()
 
     // MARK: - Appearance

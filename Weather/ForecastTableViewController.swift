@@ -12,13 +12,6 @@ class ForecastTableViewController: UITableViewController {
     
     var cachedJson: JSON?
     
-    var weatherDataModel: WeatherDataModel {
-        get {
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            return appDelegate.weatherDataModel
-        }
-    }
-    
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -29,21 +22,14 @@ class ForecastTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let location: String? = nil
-        self.loadForecast(location) { (json, error) -> Void in
+        super.viewWillAppear(animated)
+        
+        self.weatherDataModel.forecastForCurrentLocation { (json, error) -> Void in
             if let json = json {
                 self.displayWeather(json)
             } else {
                 println(error)
             }
-        }
-    }
-    
-    func loadForecast(location: String?, callback: (JSON?, NSError?) -> Void) {
-        if let location = location {
-            self.weatherDataModel.forecastForLocation(location, callback)
-        } else {
-            self.weatherDataModel.forecastForCurrentLocation(callback)
         }
     }
     

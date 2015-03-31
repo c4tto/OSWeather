@@ -12,6 +12,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet var tableView: UITableView?
     
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,19 +21,26 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.weatherDataModel.weatherForStoredLocations {
+        super.viewWillAppear(animated)
+        
+        self.tableView?.reloadData()
+        
+        self.weatherDataModel.weatherForStoredLocations { (json, error) -> Void in
         }
     }
     
     // MARK: - Table view data source
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        if section == 0 {
+            return 1
+        } else {
+            return self.weatherDataModel.locations.count
+        }
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -39,17 +48,28 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
+        
+        if indexPath.section == 0 {
+            
+        } else {
+            let locationItem = self.weatherDataModel.locations[indexPath.row]
+            cell.titleLabel.text = locationItem.name
+            //cell.conditionLabel.text = "Sunny"
+            //cell.temparatureLabel.text = "25"
+        }
+        
         return cell
     }
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return indexPath.row > 0;
+        return indexPath.section != 0
     }
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.weatherDataModel.deleteLocationAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }    
     }
 

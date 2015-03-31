@@ -39,15 +39,16 @@ class AddLocationViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
-        let mapItem = self.mapItems[indexPath.row]
-        cell.textLabel?.text = "\(mapItem.placemark.locality), \(mapItem.placemark.country)"
+        let placemark = self.mapItems[indexPath.row].placemark
+        cell.textLabel?.text = "\(placemark.locality), \(placemark.country)"
         return cell
     }
     
     // MARK: - Table View Delegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("did select row \(indexPath.row)")
+        let placemark = self.mapItems[indexPath.row].placemark
+        self.weatherDataModel.addLocationWithName(placemark.locality, country: placemark.country, countryCode: placemark.countryCode)
     }
     
     // MARK: - Search Display Controller Delegate

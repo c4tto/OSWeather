@@ -18,13 +18,6 @@ class TodayViewController: UIViewController {
     @IBOutlet var pressureLabel: UILabel!
     @IBOutlet var windDirectionLabel: UILabel!
     @IBOutlet var windSpeedLabel: UILabel!
-    
-    var weatherDataModel: WeatherDataModel {
-        get {
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            return appDelegate.weatherDataModel
-        }
-    }
 
     // MARK: - View Lifecycle
     
@@ -33,23 +26,14 @@ class TodayViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let location: String? = nil
+        super.viewWillAppear(animated)
         
-        self.loadWeather(location) { (json, error) -> Void in
+        self.weatherDataModel.weatherForCurrentLocation { (json, error) -> Void in
             if let json = json {
                 self.displayWeather(json)
             } else {
                 println(error)
             }
-        }
-    }
-    
-    func loadWeather(location: String?, callback: (JSON?, NSError?) -> Void) {
-        if let location = location {
-            self.weatherDataModel.weatherForLocation(location, callback)
-        } else {
-            self.weatherDataModel.weatherForCurrentLocation(callback)
         }
     }
     
