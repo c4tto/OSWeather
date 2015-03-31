@@ -44,13 +44,21 @@ class WeatherApi: NSObject {
             }
         }
         
+        println(url)
         manager.GET(url, parameters: nil,
-            success: { (operation, response) -> Void in
-                println(response.description)
-                let json = JSON(response)
-                self.cache[url] = (date: NSDate(), json)
-                callback(json, nil)
-            }, failure: { (operation, error) -> Void in
+            success: { (operation: AFHTTPRequestOperation!, response: AnyObject?) -> Void in
+                println(response?.description)
+                if let response: AnyObject = response {
+                    let json = JSON(response)
+                    self.cache[url] = (date: NSDate(), json)
+                    callback(json, nil)
+                } else {
+                    let error = NSError(domain: "WeatherLocalErrorDomain", code: -1, userInfo: [
+                        NSLocalizedDescriptionKey: "No HTTP response available"
+                    ])
+                    callback(nil, error)
+                }
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError?) -> Void in
                 callback(nil, error)
             })
     }
