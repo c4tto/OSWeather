@@ -40,7 +40,7 @@ class WeatherDataModel: NSObject {
         self.locationManager.startUpdatingLocationWithUpdateBlock {(manager, location, error, stopUpdating) in
             if let location = location {
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
-                    if let placemark = placemarks[0] as? CLPlacemark {
+                    if let placemark = placemarks?[0] as? CLPlacemark {
                         callback(placemark, error)
                     } else {
                         callback(nil, error)

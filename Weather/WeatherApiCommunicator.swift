@@ -54,6 +54,9 @@ class WeatherApiCommunicator: NSObject {
     
     func sendRequest(request: String, callback: (JSON?, NSError?) -> Void) {
         let url = "\(baseUrl)/\(apiVersion)/\(request)\(langUrlString)\(unitsUrlString)\(apiIdUrlString)"
+        let asciiData = url.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+        let nsString = NSString(data: asciiData!, encoding: NSASCIIStringEncoding);
+        let escapedUrl = nsString!.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!
         
         if let cachedResult = self.cache[url] {
             if cachedResult.date.timeIntervalSinceNow > -self.cacheExpirationInterval {
@@ -64,7 +67,7 @@ class WeatherApiCommunicator: NSObject {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         println(url)
-        manager.GET(url, parameters: nil,
+        manager.GET(escapedUrl, parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, response: AnyObject?) -> Void in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 println(response?.description)
@@ -85,10 +88,7 @@ class WeatherApiCommunicator: NSObject {
     }
     
     func currentWeatherForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
-        let asciiData = location.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
-        let nsString = NSString(data: asciiData!, encoding: NSASCIIStringEncoding);
-        let escapedLocation = nsString!.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!
-        let request = "weather?q=\(escapedLocation)"
+        let request = "weather?q=\(location)"
         sendRequest(request, callback: callback);
     }
     
