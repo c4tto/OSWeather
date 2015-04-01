@@ -27,13 +27,11 @@ class ForecastTableViewController: UITableViewController {
         
         self.refreshWeather()
         
-        self.weatherDataModel.forecastForCurrentLocation { (placemark, weatherDataItems, error) in
+        self.weatherDataModel.forecastForCurrentLocation {(placemark, weatherDataItems, error) in
             self.placemark = placemark
             self.cachedWeatherDataItems = weatherDataItems
             self.refreshWeather()
-            if let error = error {
-                println(error)
-            }
+            self.displayError(error)
         }
     }
     

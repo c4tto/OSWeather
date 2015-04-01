@@ -32,6 +32,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
             self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
             self.refreshWeather()
+            self.displayError(error)
         }
         
         self.weatherDataModel.weatherForStoredLocations {(weatherDataItems, error) in
@@ -39,11 +40,13 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.addToCache(weatherDataItem)
             }
             self.refreshWeather()
+            self.displayError(error)
         }
         
         self.weatherDataModel.weatherForNewlyStoredLocation {(weatherDataItem, error) in
             self.addToCache(weatherDataItem)
             self.refreshWeather()
+            self.displayError(error)
         }
     }
     

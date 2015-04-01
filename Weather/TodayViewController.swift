@@ -35,9 +35,7 @@ class TodayViewController: UIViewController {
         self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
             self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
             self.refreshWeather()
-            if let error = error {
-                println(error)
-            }
+            self.displayError(error)
         }
     }
     
