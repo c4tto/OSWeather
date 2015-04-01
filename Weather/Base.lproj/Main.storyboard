@@ -149,13 +149,16 @@
                                             </imageView>
                                         </subviews>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYI-gj-YhH">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYI-gj-YhH">
                                         <rect key="frame" x="127" y="342" width="67" height="30"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="18"/>
                                         <state key="normal" title="Share">
                                             <color key="titleColor" red="1" green="0.53333333333333333" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="shareWeather:" destination="9pv-A4-QxB" eventType="touchUpInside" id="diP-Oc-Qac"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="HorizontalDivider" translatesAutoresizingMaskIntoConstraints="NO" id="1a6-hj-vUf">
                                         <rect key="frame" x="97" y="333" width="127" height="1"/>
@@ -192,6 +195,7 @@
                         <outlet property="localityLabel" destination="VDM-rC-7pD" id="CSA-lz-Bl0"/>
                         <outlet property="pressureLabel" destination="f2C-mn-k5c" id="GoS-al-2Gc"/>
                         <outlet property="rainLabel" destination="M34-B2-gSv" id="VLH-nX-gKz"/>
+                        <outlet property="shareButton" destination="NYI-gj-YhH" id="Xwy-8y-xei"/>
                         <outlet property="temperatureLabel" destination="Hnv-Ng-ZZL" id="oiW-az-nlk"/>
                         <outlet property="windDirectionLabel" destination="d98-Nb-Jsd" id="ttY-cy-nAT"/>
                         <outlet property="windSpeedLabel" destination="fGp-SA-KYb" id="VnP-Fe-cO0"/>

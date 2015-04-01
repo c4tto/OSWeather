@@ -18,6 +18,7 @@ class TodayViewController: UIViewController {
     @IBOutlet var pressureLabel: UILabel!
     @IBOutlet var windDirectionLabel: UILabel!
     @IBOutlet var windSpeedLabel: UILabel!
+    @IBOutlet var shareButton: UIButton!
     
     var cachedCurrentLocation: (placemark: CLPlacemark?, weatherDataItem: WeatherDataItem?)?
 
@@ -44,6 +45,7 @@ class TodayViewController: UIViewController {
         let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         if let placemark = placemark {
             self.localityLabel.text = "\(placemark.locality), \(placemark.country)"
+            self.shareButton.enabled = true
         }
         if let conditionString = weatherDataItem?.conditionString {
             self.conditionLabel.text = conditionString
@@ -65,6 +67,26 @@ class TodayViewController: UIViewController {
         }
         if let windSpeedString = weatherDataItem?.windSpeedString {
             self.windSpeedLabel.text = windSpeedString
+        }
+    }
+    
+    @IBAction func shareWeather(sender: UIButton) {
+        var sharedItems: [AnyObject] = []
+        
+        if let placemark = self.cachedCurrentLocation?.placemark {
+            if let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem {
+                if let conditionString = weatherDataItem.conditionString {
+                    if let temperatureString = weatherDataItem.temperatureString {
+                        sharedItems.append("\(placemark.locality), \(placemark.country)")
+                        sharedItems.append("\(temperatureString), \(conditionString)")
+                    }
+                }
+            }
+        }
+        
+        if sharedItems.count > 0 {
+            let activityViewController = UIActivityViewController(activityItems: sharedItems, applicationActivities: nil)
+            self.presentViewController(activityViewController, animated: true, completion: nil)
         }
     }
 }
