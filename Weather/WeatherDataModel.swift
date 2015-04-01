@@ -37,9 +37,9 @@ class WeatherDataModel: NSObject {
     }
     
     private func currentLocation(callback: (CLPlacemark?, NSError?) -> Void) {
-        self.locationManager.startUpdatingLocationWithUpdateBlock { (manager, location, error, stopUpdating) -> Void in
+        self.locationManager.startUpdatingLocationWithUpdateBlock {(manager, location, error, stopUpdating) in
             if let location = location {
-                CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
                     if let placemark = placemarks[0] as? CLPlacemark {
                         callback(placemark, error)
                     } else {
@@ -53,12 +53,16 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func weatherForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
-        self.currentLocation { (placemark, error) in
+    func weatherForCurrentLocation(callback: (CLPlacemark?, WeatherDataItem?, NSError?) -> Void) {
+        self.currentLocation {(placemark, error) in
             if let placemark = placemark {
                 let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                self.weatherApi.currentWeatherForLocation(location) { (json, error) in
-                    callback(placemark, json, error)
+                self.weatherApi.currentWeatherForLocation(location) {(json, error) in
+                    var weatherDataItem: WeatherDataItem?
+                    if let json = json {
+                        weatherDataItem = WeatherDataItem(json: json, model: self)
+                    }
+                    callback(placemark, weatherDataItem, error)
                 }
             } else {
                 callback(nil, nil, error);
@@ -66,12 +70,18 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func forecastForCurrentLocation(callback: (CLPlacemark?, JSON?, NSError?) -> Void) {
-        self.currentLocation { (placemark, error) -> Void in
+    func forecastForCurrentLocation(callback: (CLPlacemark?, [WeatherDataItem]?, NSError?) -> Void) {
+        self.currentLocation {(placemark, error) in
             if let placemark = placemark {
                 let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
-                self.weatherApi.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays) { (json, error) in
-                    callback(placemark, json, error)
+                self.weatherApi.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays) {(json, error) in
+                    var weatherDataItems: [WeatherDataItem] = []
+                    if let json = json {
+                        for subjson in json["list"].arrayValue {
+                            weatherDataItems.append(WeatherDataItem(json: subjson, model: self))
+                        }
+                    }
+                    callback(placemark, weatherDataItems, error)
                 }
             } else {
                 callback(nil, nil, error)
@@ -79,19 +89,21 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func weatherForNewlyStoredLocation(callback: (JSON?, NSError?) -> Void) {
+    func weatherForNewlyStoredLocation(callback: (WeatherDataItem?, NSError?) -> Void) {
         let locationItemsWithoutId = self.locations.filter {$0.weatherApiId == 0}
         if locationItemsWithoutId.count > 0 {
             for locationItem in locationItemsWithoutId {
                 let location = "\(locationItem.name),\(locationItem.isoCountryCode)"
-                self.weatherApi.currentWeatherForLocation(location) { (json, error) in
+                self.weatherApi.currentWeatherForLocation(location) {(json, error) in
+                    var weatherDataItem: WeatherDataItem?
                     if let json = json {
-                        if let locationId = json["id"].uInt {
+                        weatherDataItem = WeatherDataItem(json: json, model: self)
+                        if let locationId = weatherDataItem?.locationId {
                             locationItem.weatherApiId = locationId
                             self.locationCoreDataModel?.saveContext()
                         }
                     }
-                    callback(json, error)
+                    callback(weatherDataItem, error)
                 }
             }
         } else {
@@ -99,10 +111,18 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func weatherForStoredLocations(callback: (JSON?, NSError?) -> Void) {
+    func weatherForStoredLocations(callback: ([WeatherDataItem]?, NSError?) -> Void) {
         let locationIds = self.locations.filter {$0.weatherApiId > 0}.map {$0.weatherApiId}
         if locationIds.count > 0 {
-            self.weatherApi.currentWeatherForLocationIds(locationIds, callback)
+            self.weatherApi.currentWeatherForLocationIds(locationIds) {(json, error) in
+                var weatherDataItems: [WeatherDataItem] = []
+                if let json = json {
+                    for subjson in json["list"].arrayValue {
+                        weatherDataItems.append(WeatherDataItem(json: subjson, model: self))
+                    }
+                }
+                callback(weatherDataItems, error)
+            }
         } else {
             callback(nil, nil)
         }

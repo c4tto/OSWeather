@@ -10,7 +10,7 @@ import UIKit
 
 class ForecastTableViewController: UITableViewController {
     
-    var cachedJson: JSON?
+    var cachedWeatherDataItems: [WeatherDataItem]?
     
     // MARK: - View Lifecycle
 
@@ -24,13 +24,8 @@ class ForecastTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.weatherDataModel.forecastForCurrentLocation { (placemark, json, error) in
-            if let placemark = placemark {
-                self.displayLocation(placemark)
-            }
-            if let json = json {
-                self.displayWeather(json)
-            }
+        self.weatherDataModel.forecastForCurrentLocation { (placemark, weatherDataItems, error) in
+            self.displayWeather(placemark, weatherDataItems)
             if let error = error {
                 println(error)
             }
@@ -41,8 +36,9 @@ class ForecastTableViewController: UITableViewController {
         self.navigationItem.title = placemark.locality
     }
     
-    func displayWeather(json: JSON) {
-        self.cachedJson = json
+    func displayWeather(placemark: CLPlacemark?, _ weatherDataItems: [WeatherDataItem]?) {
+        self.navigationItem.title = placemark?.locality
+        self.cachedWeatherDataItems = weatherDataItems
         self.tableView.reloadData()
     }
     
@@ -53,7 +49,7 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cachedJson?["list"].array?.count ?? 0
+        return self.cachedWeatherDataItems?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -63,21 +59,15 @@ class ForecastTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
         
-        if let json = self.cachedJson {
-            
-            if let timestamp = json["list"][indexPath.row]["dt"].int {
-                let date = NSDate(timeIntervalSince1970: NSTimeInterval(timestamp))
-                let formatter = NSDateFormatter()
-                formatter.dateFormat = "EEEE"
-                cell.titleLabel.text = formatter.stringFromDate(date)
+        if let weatherDataItem = self.cachedWeatherDataItems?[indexPath.row] {
+            if let weakDayString = weatherDataItem.weakDayString {
+                cell.titleLabel.text = weakDayString
             }
-            
-            if let weatherDesc = json["list"][indexPath.row]["weather"][0]["main"].string {
-                cell.conditionLabel.text = weatherDesc
+            if let conditionString = weatherDataItem.conditionString {
+                cell.conditionLabel.text = conditionString
             }
-            
-            if let temp = json["list"][indexPath.row]["temp"]["day"].float {
-                cell.temperatureLabel.text = "\(Int(round(temp)))°"
+            if let temperatureShortString = weatherDataItem.temperatureShortString {
+                cell.temperatureLabel.text = temperatureShortString
             }
         }
         return cell

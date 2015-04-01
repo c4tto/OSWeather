@@ -12,9 +12,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet var tableView: UITableView!
     
-    var cachedCurrentLocationData: (placemark: CLPlacemark?, json: JSON?)?
-    var cachedStoredLocationsJson: JSON?
-    var cachedNewlyAddedLocationJson: JSON?
+    var cachedCurrentLocation: (placemark: CLPlacemark?, weatherDataItem: WeatherDataItem?)?
+    var cachedWeatherDataItems: [UInt: WeatherDataItem] = [:]
     
     // MARK: - View Lifecycle
     
@@ -30,36 +29,28 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.tableView.reloadData()
         
-        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) in
-            self.cachedCurrentLocationData = (placemark: placemark, json: json)
+        self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
+            self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
             self.tableView.reloadData()
         }
         
-        self.weatherDataModel.weatherForStoredLocations { (json, error) in
-            self.cachedStoredLocationsJson = json
+        self.weatherDataModel.weatherForStoredLocations {(weatherDataItems, error) in
+            for weatherDataItem in weatherDataItems ?? [] {
+                self.addToCache(weatherDataItem)
+            }
             self.tableView.reloadData()
         }
         
-        self.weatherDataModel.weatherForNewlyStoredLocation { (json, error) in
-            self.cachedNewlyAddedLocationJson = json
+        self.weatherDataModel.weatherForNewlyStoredLocation {(weatherDataItem, error) in
+            self.addToCache(weatherDataItem)
             self.tableView.reloadData()
         }
     }
     
-    func cachedJsonForLocationWithId(locationId: UInt) -> JSON? {
-        if let json = self.cachedStoredLocationsJson {
-            for subjson in json["list"].arrayValue {
-                if subjson["id"].uInt == locationId {
-                    return subjson
-                }
-            }
+    func addToCache(weatherDataItem: WeatherDataItem?) -> Void {
+        if let locationId = weatherDataItem?.locationId {
+            self.cachedWeatherDataItems[locationId] = weatherDataItem!
         }
-        if let json = self.cachedNewlyAddedLocationJson {
-            if json["id"].uInt == locationId {
-                return json
-            }
-        }
-        return nil;
     }
     
     // MARK: - Table view data source
@@ -84,30 +75,30 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
         
         var locationName: String? = nil
-        var json: JSON? = nil
+        var weatherDataItem: WeatherDataItem? = nil
         if indexPath.section == 0 {
-            if let placemark = self.cachedCurrentLocationData?.placemark {
+            if let placemark = self.cachedCurrentLocation?.placemark {
                 locationName = placemark.locality
             }
-            json = self.cachedCurrentLocationData?.json
+            weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         } else {
             let locationItem = self.weatherDataModel.locations[indexPath.row]
             locationName = locationItem.name
-            json = self.cachedJsonForLocationWithId(locationItem.weatherApiId)
+            weatherDataItem = self.cachedWeatherDataItems[locationItem.weatherApiId]
         }
         
         if let locationName = locationName {
             cell.titleLabel.text = locationName
         }
         
-        if let json = json {
-            if let condition = json["weather"][0]["main"].string {
-                cell.conditionLabel.text = condition
-            }
-            if let temp = json["main"]["temp"].float {
-                cell.temperatureLabel.text = "\(Int(round(temp)))°"
-            }
+        if let conditionString = weatherDataItem?.conditionString {
+            cell.conditionLabel.text = conditionString
         }
+        
+        if let temperatureString = weatherDataItem?.temperatureShortString {
+            cell.temperatureLabel.text = temperatureString
+        }
+        
 
         return cell
     }

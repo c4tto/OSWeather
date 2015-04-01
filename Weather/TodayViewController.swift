@@ -28,84 +28,38 @@ class TodayViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.weatherDataModel.weatherForCurrentLocation { (placemark, json, error) in
-            if let placemark = placemark {
-                self.displayLocation(placemark)
-            }
-            if let json = json {
-                self.displayWeather(json)
-            }
+        self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
+            self.displayWeather(placemark, weatherDataItem)
             if let error = error {
                 println(error)
             }
         }
     }
     
-    func displayLocation(placemark: CLPlacemark) {
-        self.localityLabel.text = "\(placemark.locality), \(placemark.country)"
-    }
-    
-    func displayWeather(json: JSON) {
-        if let condition = json["weather"][0]["main"].string {
-            self.conditionLabel.text = condition
+    func displayWeather(placemark: CLPlacemark?, _ weatherDataItem: WeatherDataItem?) {
+        if let placemark = placemark {
+            self.localityLabel.text = "\(placemark.locality), \(placemark.country)"
         }
-        if let temp = json["main"]["temp"].float {
-            self.temperatureLabel.text = "\(Int(round(temp)))\(self.weatherDataModel.temperatureUnit)"
+        if let conditionString = weatherDataItem?.conditionString {
+            self.conditionLabel.text = conditionString
         }
-        if let humidity = json["main"]["humidity"].int {
-            self.humidityLabel.text = "\(humidity) %"
+        if let temperatureString = weatherDataItem?.temperatureString {
+            self.temperatureLabel.text = temperatureString
         }
-        if let rain = json["rain"]["1h"].float ?? json["rain"]["3h"].float ?? 0.0 {
-            let rainString = String(format: "%.1f", rain)
-            self.rainLabel.text = "\(rainString) mm"
+        if let humidityString = weatherDataItem?.humidityString {
+            self.humidityLabel.text = humidityString
         }
-        if let pressure = json["main"]["pressure"].int {
-            self.pressureLabel.text = "\(pressure) hPa"
+        if let rainString = weatherDataItem?.rainString {
+            self.rainLabel.text = rainString
         }
-        if let windDeg = json["wind"]["deg"].float {
-            self.windDirectionLabel.text = self.windDirectionDescription(windDeg)
+        if let pressureString = weatherDataItem?.pressureString {
+            self.pressureLabel.text = pressureString
         }
-        if let windSpeed = json["wind"]["speed"].float {
-            self.windSpeedLabel.text = "\(Int(round(windSpeed))) \(self.weatherDataModel.speedUnit)"
+        if let windDirectionString = weatherDataItem?.windDirectionString {
+            self.windDirectionLabel.text = windDirectionString
         }
-    }
-    
-    func windDirectionDescription(windDeg: Float) -> String? {
-        switch windDeg {
-        case 348.75..<360, 0..<11.25:
-            return "N"
-        case 11.25..<33.75:
-            return "NNE"
-        case 33.75..<56.25:
-            return "NE"
-        case 56.25..<78.75:
-            return "ENE"
-        case 78.75..<101.25:
-            return "E"
-        case 101.25..<123.75:
-            return "ESE"
-        case 123.75..<146.25:
-            return "SE"
-        case 146.25..<168.75:
-            return "SSE"
-        case 168.75..<191.25:
-            return "S"
-        case 191.25..<213.75:
-            return "SSW"
-        case 213.75..<236.25:
-            return "SW"
-        case 236.25..<258.75:
-            return "WSW"
-        case 258.75..<281.25:
-            return "W"
-        case 281.25..<303.75:
-            return "WNW"
-        case 303.75..<326.25:
-            return "NW"
-        case 326.25..<348.75:
-            return "NNW"
-        default:
-            return nil
+        if let windSpeedString = weatherDataItem?.windSpeedString {
+            self.windSpeedLabel.text = windSpeedString
         }
     }
 }
