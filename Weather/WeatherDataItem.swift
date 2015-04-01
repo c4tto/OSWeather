@@ -8,7 +8,20 @@
 
 import UIKit
 
+enum TemperatureUnit: String {
+    case Celsius = "Celsius"
+    case Fahrenheit = "Fahrenheit"
+}
+
+enum LengthUnit: String {
+    case Metric = "Metric"
+    case Imperial = "Imperial"
+}
+
 struct WeatherDataItem {
+    
+    static var temperatureUnit: TemperatureUnit = .Celsius
+    static var lengthUnit: LengthUnit = .Metric
     
     var locationId: UInt?
     
@@ -29,16 +42,25 @@ struct WeatherDataItem {
     }
     
     var temperature: Float?
-    var temperatureString: String? {
+    var temperatureValue: Float? {
         if let temperature = temperature {
-            let temperatureUnit = self.weatherDataModel?.temperatureUnit ?? "°C"
-            return "\(Int(round(temperature)))\(temperatureUnit)"
+            let celsiusValue = temperature - 272.15
+            return WeatherDataItem.temperatureUnit == .Celsius ? celsiusValue : celsiusValue * 1.8 + 32
+        }
+        return nil
+    }
+    var temperatureUnit: String {
+        return WeatherDataItem.temperatureUnit == .Celsius ? "°C" : "°F"
+    }
+    var temperatureString: String? {
+        if let temperatureValue = temperatureValue {
+            return "\(Int(round(temperatureValue)))\(temperatureUnit)"
         }
         return nil
     }
     var temperatureShortString: String? {
-        if let temperature = temperature {
-            return "\(Int(round(temperature)))°"
+        if let temperatureValue = temperatureValue {
+            return "\(Int(round(temperatureValue)))°"
         }
         return nil
     }
@@ -112,10 +134,18 @@ struct WeatherDataItem {
     }
     
     var windSpeed: Float?
-    var windSpeedString: String? {
+    var windSpeedValue: Float? {
         if let windSpeed = windSpeed {
-            let speedUnit = self.weatherDataModel?.speedUnit ?? "m/s"
-            return "\(Int(round(windSpeed))) \(speedUnit)"
+            return WeatherDataItem.lengthUnit == .Metric ? windSpeed : windSpeed * 3.2808
+        }
+        return nil
+    }
+    var windSpeedUnit: String {
+        return WeatherDataItem.lengthUnit == .Metric ? "m/s" : "ft/s"
+    }
+    var windSpeedString: String? {
+        if let windSpeedValue = windSpeedValue {
+            return "\(Int(round(windSpeedValue))) \(windSpeedUnit)"
         }
         return nil
     }

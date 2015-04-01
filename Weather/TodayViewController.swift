@@ -18,6 +18,8 @@ class TodayViewController: UIViewController {
     @IBOutlet var pressureLabel: UILabel!
     @IBOutlet var windDirectionLabel: UILabel!
     @IBOutlet var windSpeedLabel: UILabel!
+    
+    var cachedCurrentLocation: (placemark: CLPlacemark?, weatherDataItem: WeatherDataItem?)?
 
     // MARK: - View Lifecycle
     
@@ -28,15 +30,20 @@ class TodayViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.refreshWeather()
+        
         self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
-            self.displayWeather(placemark, weatherDataItem)
+            self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
+            self.refreshWeather()
             if let error = error {
                 println(error)
             }
         }
     }
     
-    func displayWeather(placemark: CLPlacemark?, _ weatherDataItem: WeatherDataItem?) {
+    func refreshWeather() {
+        let placemark = self.cachedCurrentLocation?.placemark
+        let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         if let placemark = placemark {
             self.localityLabel.text = "\(placemark.locality), \(placemark.country)"
         }

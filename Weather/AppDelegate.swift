@@ -17,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.registerDefaults([
+            "temperatureUnit": TemperatureUnit.Celsius.rawValue,
+            "lengthUnit": LengthUnit.Metric.rawValue,
+        ])
+        
+        if let temperatureUnit = userDefaults.stringForKey("temperatureUnit") {
+            WeatherDataItem.temperatureUnit = TemperatureUnit(rawValue: temperatureUnit) ?? .Celsius
+        }
+        if let lengthUnit = userDefaults.stringForKey("lengthUnit") {
+            WeatherDataItem.lengthUnit = LengthUnit(rawValue: lengthUnit) ?? .Metric
+        }
+        
         initAppearance()
         return true
     }

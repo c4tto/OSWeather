@@ -9,6 +9,7 @@
 import UIKit
 
 enum WeatherApiUnits {
+    case Internal
     case Metric
     case Imperial
 }
@@ -22,7 +23,7 @@ class WeatherApiCommunicator: NSObject {
     
     var language: String?
     
-    var units: WeatherApiUnits = .Metric
+    var units: WeatherApiUnits = .Internal
     
     var cache: [String: (date: NSDate, json: JSON)] = [:]
     var cacheExpirationInterval: NSTimeInterval = 10 * 60
@@ -32,10 +33,27 @@ class WeatherApiCommunicator: NSObject {
         super.init()
     }
     
+    var langUrlString: String {
+        return language != nil ? "&lang=\(language)" : ""
+    }
+    
+    var unitsUrlString: String {
+        switch self.units {
+        case .Metric:
+            return "&units=metric"
+        case .Imperial:
+            return "&units=imperial"
+        default:
+            return ""
+        }
+    }
+    
+    var apiIdUrlString: String {
+        return "&APPIID=\(apiId)"
+    }
+    
     func sendRequest(request: String, callback: (JSON?, NSError?) -> Void) {
-        let langString = language != nil ? "&lang=\(language)" : ""
-        let unitsString = units == .Metric ? "&units=metric" : "&units=imperial"
-        let url = "\(baseUrl)/\(apiVersion)/\(request)\(langString)\(unitsString)&APPIID=\(apiId)"
+        let url = "\(baseUrl)/\(apiVersion)/\(request)\(langUrlString)\(unitsUrlString)\(apiIdUrlString)"
         
         if let cachedResult = self.cache[url] {
             if cachedResult.date.timeIntervalSinceNow > -self.cacheExpirationInterval {
@@ -46,7 +64,7 @@ class WeatherApiCommunicator: NSObject {
         
         println(url)
         manager.GET(url, parameters: nil,
-            success: { (operation: AFHTTPRequestOperation!, response: AnyObject?) -> Void in
+            success: {(operation: AFHTTPRequestOperation!, response: AnyObject?) -> Void in
                 println(response?.description)
                 if let response: AnyObject = response {
                     let json = JSON(response)
@@ -58,7 +76,7 @@ class WeatherApiCommunicator: NSObject {
                     ])
                     callback(nil, error)
                 }
-            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError?) -> Void in
+            }, failure: {(operation: AFHTTPRequestOperation!, error: NSError?) -> Void in
                 callback(nil, error)
             })
     }

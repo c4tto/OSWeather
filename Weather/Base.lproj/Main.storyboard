@@ -295,7 +295,7 @@
                         <sections>
                             <tableViewSection headerTitle="General" id="mmD-VL-bEu">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Owz-s8-p3P" detailTextLabel="jMQ-9B-oxT" style="IBUITableViewCellStyleValue1" id="6IN-tO-ycx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Owz-s8-p3P" detailTextLabel="jMQ-9B-oxT" style="IBUITableViewCellStyleValue1" id="6IN-tO-ycx" userLabel="Length Cell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6IN-tO-ycx" id="UCy-YN-adQ">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -315,7 +315,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KuD-yZ-f6y" detailTextLabel="07C-5p-d8g" style="IBUITableViewCellStyleValue1" id="rdH-jQ-3bi">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KuD-yZ-f6y" detailTextLabel="07C-5p-d8g" style="IBUITableViewCellStyleValue1" id="rdH-jQ-3bi" userLabel="Temperature Cell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rdH-jQ-3bi" id="Ggi-W5-yDH">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -344,6 +344,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="INU-JX-boq"/>
+                    <connections>
+                        <outlet property="lengthCell" destination="6IN-tO-ycx" id="jqj-3V-XGP"/>
+                        <outlet property="temperatureCell" destination="rdH-jQ-3bi" id="vey-Yw-dTe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E75-mg-R3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

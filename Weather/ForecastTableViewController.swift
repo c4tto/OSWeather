@@ -11,6 +11,7 @@ import UIKit
 class ForecastTableViewController: UITableViewController {
     
     var cachedWeatherDataItems: [WeatherDataItem]?
+    var placemark: CLPlacemark?
     
     // MARK: - View Lifecycle
 
@@ -24,21 +25,20 @@ class ForecastTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.refreshWeather()
+        
         self.weatherDataModel.forecastForCurrentLocation { (placemark, weatherDataItems, error) in
-            self.displayWeather(placemark, weatherDataItems)
+            self.placemark = placemark
+            self.cachedWeatherDataItems = weatherDataItems
+            self.refreshWeather()
             if let error = error {
                 println(error)
             }
         }
     }
     
-    func displayLocation(placemark: CLPlacemark) {
-        self.navigationItem.title = placemark.locality
-    }
-    
-    func displayWeather(placemark: CLPlacemark?, _ weatherDataItems: [WeatherDataItem]?) {
-        self.navigationItem.title = placemark?.locality
-        self.cachedWeatherDataItems = weatherDataItems
+    func refreshWeather() {
+        self.navigationItem.title = self.placemark?.locality
         self.tableView.reloadData()
     }
     
