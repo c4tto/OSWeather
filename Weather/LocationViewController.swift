@@ -60,6 +60,14 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.reloadData()
     }
     
+    func locationAttributedStringWithArrow(placemark: CLPlacemark) -> NSAttributedString {
+        let attachement = NSTextAttachment()
+        attachement.image = UIImage(named: "Arrow")
+        let attachementString = NSAttributedString(attachment: attachement)
+        let placemarkString = NSMutableAttributedString(string: "\(placemark.locality) ")
+        placemarkString.appendAttributedString(attachementString)
+        return placemarkString as NSAttributedString
+    }
     // MARK: - Table view data source
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -81,21 +89,17 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
         
-        var locationName: String? = nil
         var weatherDataItem: WeatherDataItem? = nil
+        
         if indexPath.section == 0 {
             if let placemark = self.cachedCurrentLocation?.placemark {
-                locationName = placemark.locality
+                cell.titleLabel.attributedText = self.locationAttributedStringWithArrow(placemark)
             }
             weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         } else {
             let locationItem = self.weatherDataModel.locations[indexPath.row]
-            locationName = locationItem.name
+            cell.titleLabel.text = locationItem.name
             weatherDataItem = self.cachedWeatherDataItems[locationItem.weatherApiId]
-        }
-        
-        if let locationName = locationName {
-            cell.titleLabel.text = locationName
         }
         
         if let conditionString = weatherDataItem?.conditionString {
@@ -105,7 +109,6 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         if let temperatureString = weatherDataItem?.temperatureShortString {
             cell.temperatureLabel.text = temperatureString
         }
-        
 
         return cell
     }

@@ -44,7 +44,7 @@ class TodayViewController: UIViewController {
         let placemark = self.cachedCurrentLocation?.placemark
         let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         if let placemark = placemark {
-            self.localityLabel.text = "\(placemark.locality), \(placemark.country)"
+            self.localityLabel.attributedText = self.locationAttributedStringWithArrow(placemark)
             self.shareButton.enabled = true
         }
         if let conditionString = weatherDataItem?.conditionString {
@@ -68,6 +68,15 @@ class TodayViewController: UIViewController {
         if let windSpeedString = weatherDataItem?.windSpeedString {
             self.windSpeedLabel.text = windSpeedString
         }
+    }
+    
+    func locationAttributedStringWithArrow(placemark: CLPlacemark) -> NSAttributedString {
+        let attachement = NSTextAttachment()
+        attachement.image = UIImage(named: "Arrow")
+        let attachementString = NSAttributedString(attachment: attachement)
+        let placemarkString = NSMutableAttributedString(string: " \(placemark.locality), \(placemark.country)")
+        placemarkString.insertAttributedString(attachementString, atIndex: 0)
+        return placemarkString
     }
     
     @IBAction func shareWeather(sender: UIButton) {
