@@ -10,6 +10,7 @@ import UIKit
 
 class TodayViewController: UIViewController {
     
+    @IBOutlet var weatherImageView: UIImageView!
     @IBOutlet var localityLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var conditionLabel: UILabel!
@@ -46,6 +47,9 @@ class TodayViewController: UIViewController {
         if let placemark = placemark {
             self.localityLabel.attributedText = self.locationAttributedStringWithArrow(placemark)
             self.shareButton.enabled = true
+        }
+        if let image = weatherDataItem?.image {
+            self.weatherImageView.image = image
         }
         if let conditionString = weatherDataItem?.conditionString {
             self.conditionLabel.text = conditionString

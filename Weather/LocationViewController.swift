@@ -109,6 +109,10 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         if let temperatureString = weatherDataItem?.temperatureShortString {
             cell.temperatureLabel.text = temperatureString
         }
+        
+        if let image = weatherDataItem?.image {
+            cell.weatherImageView.image = image
+        }
 
         return cell
     }

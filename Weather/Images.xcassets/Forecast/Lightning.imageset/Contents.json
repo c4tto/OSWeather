@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "CL.png"
+      "filename" : "Lightning_Big.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "CL@2x.png"
+      "filename" : "Lightning_Big@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "CL@3x.png"
+      "filename" : "Lightning_Big@3x.png"
     }
   ],
   "info" : {

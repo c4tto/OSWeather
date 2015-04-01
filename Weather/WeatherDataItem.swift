@@ -41,6 +41,35 @@ struct WeatherDataItem {
         return condition
     }
     
+    var imageId: String?
+    var imageName: String? {
+        if let imageId = imageId {
+            switch imageId {
+            case "01d", "01n":
+                return "Sun"
+            case "02d", "02n", "03d", "03n", "04d", "04n":
+                return "Cloudy"
+            case "09d", "09n", "10d", "10n":
+                return "Rain"
+            case "11d", "11n":
+                return "Lightning"
+            case "13d", "13n": // should be snow
+                return "Rain"
+            case "50d", "50n": // should be mist
+                return "Rain"
+            default:
+                return nil
+            }
+        }
+        return nil
+    }
+    var image: UIImage? {
+        if let imageName = imageName {
+            return UIImage(named: imageName)
+        }
+        return nil
+    }
+    
     var temperature: Float?
     var temperatureValue: Float? {
         if let temperature = temperature {
@@ -150,15 +179,13 @@ struct WeatherDataItem {
         return nil
     }
     
-    weak var weatherDataModel: WeatherDataModel?
-    
-    init(json: JSON, model: WeatherDataModel) {
-        weatherDataModel = model
+    init(_ json: JSON) {
         locationId = json["id"].uInt
         if let dt = json["dt"].float {
             timestamp = NSTimeInterval(dt)
         }
         condition = json["weather", 0, "main"].string
+        imageId = json["weather", 0, "icon"].string
         temperature = json["main", "temp"].float ?? json["temp", "day"].float
         humidity = json["main", "humidity"].uInt
         rain = json["rain", "1h"].float ?? json["rain", "3h"].float ?? json["rain"].float

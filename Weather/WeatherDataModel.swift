@@ -60,7 +60,7 @@ class WeatherDataModel: NSObject {
                 self.communicator.currentWeatherForLocation(location) {(json, error) in
                     var weatherDataItem: WeatherDataItem?
                     if let json = json {
-                        weatherDataItem = WeatherDataItem(json: json, model: self)
+                        weatherDataItem = WeatherDataItem(json)
                     }
                     callback(placemark, weatherDataItem, error)
                 }
@@ -78,7 +78,7 @@ class WeatherDataModel: NSObject {
                     var weatherDataItems: [WeatherDataItem] = []
                     if let json = json {
                         for subjson in json["list"].arrayValue {
-                            weatherDataItems.append(WeatherDataItem(json: subjson, model: self))
+                            weatherDataItems.append(WeatherDataItem(subjson))
                         }
                     }
                     callback(placemark, weatherDataItems, error)
@@ -97,7 +97,7 @@ class WeatherDataModel: NSObject {
                 self.communicator.currentWeatherForLocation(location) {(json, error) in
                     var weatherDataItem: WeatherDataItem?
                     if let json = json {
-                        weatherDataItem = WeatherDataItem(json: json, model: self)
+                        weatherDataItem = WeatherDataItem(json)
                         if let locationId = weatherDataItem?.locationId {
                             locationItem.weatherApiId = locationId
                             self.locationCoreDataModel?.saveContext()
@@ -118,7 +118,7 @@ class WeatherDataModel: NSObject {
                 var weatherDataItems: [WeatherDataItem] = []
                 if let json = json {
                     for subjson in json["list"].arrayValue {
-                        weatherDataItems.append(WeatherDataItem(json: subjson, model: self))
+                        weatherDataItems.append(WeatherDataItem(subjson))
                     }
                 }
                 callback(weatherDataItems, error)

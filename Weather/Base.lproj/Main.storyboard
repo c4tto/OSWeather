@@ -55,7 +55,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gn7-ut-cG7">
                                 <rect key="frame" x="140" y="124" width="320" height="380"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d61-eZ-Eca">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d61-eZ-Eca">
                                         <rect key="frame" x="117" y="4" width="87" height="87"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDM-rC-7pD" userLabel="Location">
@@ -130,7 +130,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Wind" translatesAutoresizingMaskIntoConstraints="NO" id="UD4-1G-KJN">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WInd" translatesAutoresizingMaskIntoConstraints="NO" id="UD4-1G-KJN">
                                                 <rect key="frame" x="29" y="8" width="22" height="22"/>
                                             </imageView>
                                         </subviews>
@@ -197,6 +197,7 @@
                         <outlet property="rainLabel" destination="M34-B2-gSv" id="VLH-nX-gKz"/>
                         <outlet property="shareButton" destination="NYI-gj-YhH" id="Xwy-8y-xei"/>
                         <outlet property="temperatureLabel" destination="Hnv-Ng-ZZL" id="oiW-az-nlk"/>
+                        <outlet property="weatherImageView" destination="d61-eZ-Eca" id="ahX-vc-lWB"/>
                         <outlet property="windDirectionLabel" destination="d98-Nb-Jsd" id="ttY-cy-nAT"/>
                         <outlet property="windSpeedLabel" destination="fGp-SA-KYb" id="VnP-Fe-cO0"/>
                     </connections>
@@ -502,7 +503,7 @@
         <image name="Settings" width="23" height="23"/>
         <image name="Today" width="24" height="24"/>
         <image name="VerticalDivider" width="3" height="21"/>
-        <image name="Wind" width="25" height="16"/>
+        <image name="WInd" width="86" height="55"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rwM-NL-Ox8"/>

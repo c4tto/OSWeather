@@ -67,6 +67,9 @@ class ForecastTableViewController: UITableViewController {
             if let temperatureShortString = weatherDataItem.temperatureShortString {
                 cell.temperatureLabel.text = temperatureShortString
             }
+            if let image = weatherDataItem.image {
+                cell.weatherImageView.image = image
+            }
         }
         return cell
     }
