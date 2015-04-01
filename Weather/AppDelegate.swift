@@ -102,10 +102,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Data Models
     
     lazy var weatherDataModel: WeatherDataModel = {
-        return WeatherDataModel(weatherApi: self.weatherApi, locationCoreDataModel: self.locationCoreDataModel)
+        return WeatherDataModel(communicator: self.communicator, locationCoreDataModel: self.locationCoreDataModel)
     }()
     
-    lazy var weatherApi = WeatherApi(apiId: "3b9e5a5284eaa6be66f5cceb016b5471")
+    lazy var communicator = WeatherApiCommunicator(apiId: "3b9e5a5284eaa6be66f5cceb016b5471")
     
     lazy var locationCoreDataModel: LocationCoreDataModel? = {
         if let moc = self.managedObjectContext {

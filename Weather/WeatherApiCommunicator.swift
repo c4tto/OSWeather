@@ -13,7 +13,7 @@ enum WeatherApiUnits {
     case Imperial
 }
 
-class WeatherApi: NSObject {
+class WeatherApiCommunicator: NSObject {
     
     let manager = AFHTTPRequestOperationManager()
     let baseUrl = "http://api.openweathermap.org/data"
