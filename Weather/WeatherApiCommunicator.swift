@@ -68,7 +68,7 @@ class WeatherApiCommunicator: NSObject {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         println(url)
         manager.GET(escapedUrl, parameters: nil,
-            success: {(operation: AFHTTPRequestOperation!, response: AnyObject?) -> Void in
+            success: {(operation: AFHTTPRequestOperation!, response: AnyObject?) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 println(response?.description)
                 if let response: AnyObject = response {
@@ -81,7 +81,8 @@ class WeatherApiCommunicator: NSObject {
                     ])
                     callback(nil, error)
                 }
-            }, failure: {(operation: AFHTTPRequestOperation!, error: NSError?) -> Void in
+            },
+            failure: {(operation: AFHTTPRequestOperation!, error: NSError?) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                 callback(nil, error)
             })
