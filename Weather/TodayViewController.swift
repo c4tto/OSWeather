@@ -32,16 +32,16 @@ class TodayViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.refreshWeather()
+        self.updateView()
         
         self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
             self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
-            self.refreshWeather()
+            self.updateView()
             self.displayError(error)
         }
     }
     
-    func refreshWeather() {
+    func updateView() {
         let placemark = self.cachedCurrentLocation?.placemark
         let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         if let placemark = placemark {

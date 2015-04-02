@@ -27,11 +27,11 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.refreshWeather()
+        self.updateView()
         
         self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
             self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
-            self.refreshWeather()
+            self.updateView()
             self.displayError(error)
         }
         
@@ -39,13 +39,13 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             for weatherDataItem in weatherDataItems ?? [] {
                 self.addToCache(weatherDataItem)
             }
-            self.refreshWeather()
+            self.updateView()
             self.displayError(error)
         }
         
         self.weatherDataModel.weatherForNewlyStoredLocation {(weatherDataItem, error) in
             self.addToCache(weatherDataItem)
-            self.refreshWeather()
+            self.updateView()
             self.displayError(error)
         }
     }
@@ -56,7 +56,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func refreshWeather() {
+    func updateView() {
         self.tableView.reloadData()
     }
     

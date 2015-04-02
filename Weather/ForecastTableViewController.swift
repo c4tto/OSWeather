@@ -25,17 +25,17 @@ class ForecastTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.refreshWeather()
+        self.updateView()
         
         self.weatherDataModel.forecastForCurrentLocation {(placemark, weatherDataItems, error) in
             self.placemark = placemark
             self.cachedWeatherDataItems = weatherDataItems
-            self.refreshWeather()
+            self.updateView()
             self.displayError(error)
         }
     }
     
-    func refreshWeather() {
+    func updateView() {
         self.navigationItem.title = self.placemark?.locality
         self.tableView.reloadData()
     }
