@@ -28,14 +28,6 @@ class WeatherDataModel: NSObject {
         super.init()
     }
     
-    var temperatureUnit: String {
-        return self.communicator.units == .Metric ? "°C" : "°F"
-    }
-    
-    var speedUnit: String {
-        return self.communicator.units == .Metric ? "m/s" : "ft/s"
-    }
-    
     private func currentLocation(callback: (CLPlacemark?, NSError?) -> Void) {
         self.locationManager.startUpdatingLocationWithUpdateBlock {(manager, location, error, stopUpdating) in
             if let location = location {
