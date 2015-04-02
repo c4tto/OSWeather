@@ -102,7 +102,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Raindrop" translatesAutoresizingMaskIntoConstraints="NO" id="q6n-5v-VkJ">
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RainDrop" translatesAutoresizingMaskIntoConstraints="NO" id="q6n-5v-VkJ">
                                                 <rect key="frame" x="29" y="8" width="22" height="22"/>
                                             </imageView>
                                         </subviews>
@@ -499,7 +499,7 @@
         <image name="HorizontalDivider" width="127" height="1"/>
         <image name="Location" width="22" height="14"/>
         <image name="Rain" width="22" height="22"/>
-        <image name="Raindrop" width="16" height="19"/>
+        <image name="RainDrop" width="16" height="19"/>
         <image name="Settings" width="23" height="23"/>
         <image name="Today" width="24" height="24"/>
         <image name="VerticalDivider" width="3" height="21"/>
@@ -507,6 +507,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rwM-NL-Ox8"/>
-        <segue reference="xXn-wY-hgb"/>
+        <segue reference="Yz3-ba-bcK"/>
     </inferredMetricsTieBreakers>
 </document>
