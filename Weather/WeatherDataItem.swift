@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Ondrej Stocek. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 enum TemperatureUnit: String {
     case Celsius = "Celsius"
@@ -24,6 +24,9 @@ struct WeatherDataItem {
     static var lengthUnit: LengthUnit = .Metric
     
     var locationId: UInt?
+    var locationName: String?
+    var locationCountry: String?
+    var locationIsoCountryCode: String?
     
     var timestamp: NSTimeInterval?
     var weakDayString: String? {
@@ -194,3 +197,113 @@ struct WeatherDataItem {
         windSpeed = json["wind", "speed"].float
     }
 }
+/*
+http://api.openweathermap.org/data/2.5/weather?q=London,uk
+{
+    "coord":{
+        "lon":-0.13,
+        "lat":51.51
+    },
+    "sys":{
+        "message":0.2919,
+        "country":"GB",
+        "sunrise":1428039025,
+        "sunset":1428086221
+    },
+    "weather":[{
+        "id":500,
+        "main":"Rain",
+        "description":"light rain",
+        "icon":"10d"
+    }],
+    "base":"stations",
+    "main":{
+        "temp":278.915,
+        "temp_min":278.915,
+        "temp_max":278.915,
+        "pressure":1021.49,
+        "sea_level":1029.59,
+        "grnd_level":1021.49,
+        "humidity":96
+    },
+    "wind":{
+        "speed":2.59,
+        "deg":161.505
+    },
+    "clouds":{
+        "all":92
+    },
+    "rain":{
+        "3h":0.38
+    },
+    "dt":1428045362,
+    "id":2643743,
+    "name":"London",
+    "cod":200
+}
+
+http://api.openweathermap.org/data/2.5/forecast/daily?q=London,uk&cnt=2
+
+{
+    "cod":"200",
+    "message":0.0184,
+    "city":{
+        "id":2643743,
+        "name":"London",
+        "coord":{
+            "lon":-0.12574,
+            "lat":51.50853
+        },
+        "country":"GB",
+        "population":0,
+        "sys":{
+            "population":0
+        }
+    },
+    "cnt":2,
+    "list":[{
+        "dt":1428062400,
+        "temp":{
+            "day":282.56,
+            "min":278.02,
+            "max":283.2,
+            "night":278.8,
+            "eve":281.94,
+            "morn":278.02
+        },
+        "pressure":1019.47,
+        "humidity":100,
+        "weather":[{
+            "id":501,
+            "main":"Rain",
+            "description":"moderate rain",
+            "icon":"10d"
+        }],
+        "speed":4.16,
+        "deg":132,
+        "clouds":92,
+        "rain":3.98
+    },{
+        "dt":1428148800,
+        "temp":{
+            "day":281.28,
+            "min":274.21,
+            "max":282.18,
+            "night":274.21,
+            "eve":280.37,
+            "morn":275.99
+        },
+        "pressure":1032.62,
+        "humidity":100,
+        "weather":[{
+            "id":801,
+            "main":"Clouds",
+            "description":"few clouds",
+            "icon":"02d"
+        }],
+        "speed":4.58,
+        "deg":38,
+        "clouds":20
+    }]
+}
+*/

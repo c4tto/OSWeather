@@ -21,7 +21,7 @@ class TodayViewController: UIViewController {
     @IBOutlet var windSpeedLabel: UILabel!
     @IBOutlet var shareButton: UIButton!
     
-    var cachedCurrentLocation: (placemark: CLPlacemark?, weatherDataItem: WeatherDataItem?)?
+    var weatherDataItem: WeatherDataItem?
 
     // MARK: - View Lifecycle
     
@@ -32,72 +32,73 @@ class TodayViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.weatherDataItem = nil
         self.updateView()
         
-        self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
-            self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
+        self.weatherDataModel.weatherForSelectedLocation {(weatherDataItem, error) in
+            self.weatherDataItem = weatherDataItem
             self.updateView()
-            self.displayError(error)
         }
     }
     
     func updateView() {
-        let placemark = self.cachedCurrentLocation?.placemark
-        let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
-        if let placemark = placemark {
-            self.localityLabel.attributedText = self.locationAttributedStringWithArrow(placemark)
-            self.shareButton.enabled = true
-        }
-        if let image = weatherDataItem?.image {
-            self.weatherImageView.image = image
-        }
-        if let conditionString = weatherDataItem?.conditionString {
-            self.conditionLabel.text = conditionString
-        }
-        if let temperatureString = weatherDataItem?.temperatureString {
-            self.temperatureLabel.text = temperatureString
-        }
-        if let humidityString = weatherDataItem?.humidityString {
-            self.humidityLabel.text = humidityString
-        }
-        if let rainString = weatherDataItem?.rainString {
-            self.rainLabel.text = rainString
-        }
-        if let pressureString = weatherDataItem?.pressureString {
-            self.pressureLabel.text = pressureString
-        }
-        if let windDirectionString = weatherDataItem?.windDirectionString {
-            self.windDirectionLabel.text = windDirectionString
-        }
-        if let windSpeedString = weatherDataItem?.windSpeedString {
-            self.windSpeedLabel.text = windSpeedString
+        if let weatherDataItem = self.weatherDataItem {
+            if let name = weatherDataItem.locationName {
+                if let country = weatherDataItem.locationCountry {
+                    var location = "\(name), \(country)"
+                    if self.weatherDataModel.selectedLocationIndex == nil {
+                        self.localityLabel.attributedText = self.attributedStringWithArrow(location)
+                    } else {
+                        self.localityLabel.attributedText = NSAttributedString(string: location)
+                    }
+                }
+            }
+
+            if let image = weatherDataItem.image {
+                self.weatherImageView.image = image
+            }
+            if let conditionString = weatherDataItem.conditionString {
+                self.conditionLabel.text = conditionString
+            }
+            if let temperatureString = weatherDataItem.temperatureString {
+                self.temperatureLabel.text = temperatureString
+            }
+            if let humidityString = weatherDataItem.humidityString {
+                self.humidityLabel.text = humidityString
+            }
+            if let rainString = weatherDataItem.rainString {
+                self.rainLabel.text = rainString
+            }
+            if let pressureString = weatherDataItem.pressureString {
+                self.pressureLabel.text = pressureString
+            }
+            if let windDirectionString = weatherDataItem.windDirectionString {
+                self.windDirectionLabel.text = windDirectionString
+            }
+            if let windSpeedString = weatherDataItem.windSpeedString {
+                self.windSpeedLabel.text = windSpeedString
+            }
+        } else {
+            // show loading spinner
         }
     }
     
-    func locationAttributedStringWithArrow(placemark: CLPlacemark) -> NSAttributedString {
+    func attributedStringWithArrow(string: String) -> NSAttributedString {
         let attachement = NSTextAttachment()
         attachement.image = UIImage(named: "Arrow")
         let attachementString = NSAttributedString(attachment: attachement)
-        let placemarkString = NSMutableAttributedString(string: " \(placemark.locality), \(placemark.country)")
+        let placemarkString = NSMutableAttributedString(string: string)
         placemarkString.insertAttributedString(attachementString, atIndex: 0)
         return placemarkString
     }
     
     @IBAction func shareWeather(sender: UIButton) {
-        var sharedItems: [AnyObject] = []
+        if let weatherDataItem = self.weatherDataItem {
+            var sharedItems: [AnyObject] = [
+                "\(weatherDataItem.locationName), \(weatherDataItem.locationCountry)",
+                "\(weatherDataItem.temperatureString), \(weatherDataItem.conditionString)",
+            ]
         
-        if let placemark = self.cachedCurrentLocation?.placemark {
-            if let weatherDataItem = self.cachedCurrentLocation?.weatherDataItem {
-                if let conditionString = weatherDataItem.conditionString {
-                    if let temperatureString = weatherDataItem.temperatureString {
-                        sharedItems.append("\(placemark.locality), \(placemark.country)")
-                        sharedItems.append("\(temperatureString), \(conditionString)")
-                    }
-                }
-            }
-        }
-        
-        if sharedItems.count > 0 {
             let activityViewController = UIActivityViewController(activityItems: sharedItems, applicationActivities: nil)
             self.presentViewController(activityViewController, animated: true, completion: nil)
         }

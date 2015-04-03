@@ -370,7 +370,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t3Z-ya-Z2D">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t3Z-ya-Z2D">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -400,7 +400,7 @@
                     <navigationItem key="navigationItem" title="Location" id="9Pe-Fz-KhM">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="mHq-Ng-2RF">
                             <connections>
-                                <segue destination="49e-Tb-3d3" kind="custom" customClass="DismissSegue" customModule="Weather" id="AD5-RA-vDE"/>
+                                <segue destination="49e-Tb-3d3" kind="custom" identifier="dismissLocation" customClass="DismissSegue" customModule="Weather" id="AD5-RA-vDE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

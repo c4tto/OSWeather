@@ -12,7 +12,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet var tableView: UITableView!
     
-    var cachedCurrentLocation: (placemark: CLPlacemark?, weatherDataItem: WeatherDataItem?)?
+    var currentWeatherDataItem: WeatherDataItem? = nil
     var cachedWeatherDataItems: [UInt: WeatherDataItem] = [:]
     
     // MARK: - View Lifecycle
@@ -29,8 +29,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.updateView()
         
-        self.weatherDataModel.weatherForCurrentLocation {(placemark, weatherDataItem, error) in
-            self.cachedCurrentLocation = (placemark: placemark, weatherDataItem: weatherDataItem)
+        self.weatherDataModel.weatherForCurrentLocation {(weatherDataItem, error) in
+            self.currentWeatherDataItem = weatherDataItem
             self.updateView()
             self.displayError(error)
         }
@@ -60,20 +60,21 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.reloadData()
     }
     
-    func locationAttributedStringWithArrow(placemark: CLPlacemark) -> NSAttributedString {
+    func attributedStringWithArrow(string: String) -> NSAttributedString {
         let attachement = NSTextAttachment()
         attachement.image = UIImage(named: "Arrow")
         let attachementString = NSAttributedString(attachment: attachement)
-        let placemarkString = NSMutableAttributedString(string: "\(placemark.locality) ")
-        placemarkString.appendAttributedString(attachementString)
-        return placemarkString as NSAttributedString
+        let attributedString = NSMutableAttributedString(string: string)
+        attributedString.appendAttributedString(attachementString)
+        return attributedString as NSAttributedString
     }
+    
     // MARK: - Table view data source
-
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
@@ -81,7 +82,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             return self.weatherDataModel.locations.count
         }
     }
-
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 83;
     }
@@ -92,10 +93,10 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         var weatherDataItem: WeatherDataItem? = nil
         
         if indexPath.section == 0 {
-            if let placemark = self.cachedCurrentLocation?.placemark {
-                cell.titleLabel.attributedText = self.locationAttributedStringWithArrow(placemark)
+            weatherDataItem = self.currentWeatherDataItem
+            if let name = weatherDataItem?.locationName {
+                cell.titleLabel.attributedText = self.attributedStringWithArrow(name)
             }
-            weatherDataItem = self.cachedCurrentLocation?.weatherDataItem
         } else {
             let locationItem = self.weatherDataModel.locations[indexPath.row]
             cell.titleLabel.text = locationItem.name
@@ -116,7 +117,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 
         return cell
     }
-
+    
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return indexPath.section != 0
     }
@@ -126,5 +127,10 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             self.weatherDataModel.deleteLocationAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }    
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.weatherDataModel.selectedLocationIndex = indexPath.section == 0 ? nil : indexPath.row
+        self.performSegueWithIdentifier("dismissLocation", sender: self)
     }
 }

@@ -10,8 +10,7 @@ import UIKit
 
 class ForecastTableViewController: UITableViewController {
     
-    var cachedWeatherDataItems: [WeatherDataItem]?
-    var placemark: CLPlacemark?
+    var weatherDataItems: [WeatherDataItem]?
     
     // MARK: - View Lifecycle
 
@@ -25,18 +24,23 @@ class ForecastTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.weatherDataItems = nil
         self.updateView()
         
-        self.weatherDataModel.forecastForCurrentLocation {(placemark, weatherDataItems, error) in
-            self.placemark = placemark
-            self.cachedWeatherDataItems = weatherDataItems
+        self.weatherDataModel.forecastForSelectedLocation {(weatherDataItems, error) in
+            self.weatherDataItems = weatherDataItems
             self.updateView()
             self.displayError(error)
         }
     }
     
     func updateView() {
-        self.navigationItem.title = self.placemark?.locality
+        if let weatherDataItems = self.weatherDataItems {
+            self.navigationItem.title = weatherDataItems[0].locationName
+        } else {
+            self.navigationItem.title = nil
+            // show loading spinner
+        }
         self.tableView.reloadData()
     }
     
@@ -47,7 +51,7 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cachedWeatherDataItems?.count ?? 0
+        return self.weatherDataItems?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -57,7 +61,7 @@ class ForecastTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
         
-        if let weatherDataItem = self.cachedWeatherDataItems?[indexPath.row] {
+        if let weatherDataItem = self.weatherDataItems?[indexPath.row] {
             if let weakDayString = weatherDataItem.weakDayString {
                 cell.titleLabel.text = weakDayString
             }

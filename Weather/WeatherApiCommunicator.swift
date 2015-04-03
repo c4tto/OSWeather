@@ -90,17 +90,22 @@ class WeatherApiCommunicator: NSObject {
     
     func currentWeatherForLocation(location: String, callback: (JSON?, NSError?) -> Void) {
         let request = "weather?q=\(location)"
-        sendRequest(request, callback: callback);
+        self.sendRequest(request, callback: callback)
     }
     
     func currentWeatherForLocationIds(locationIds: [UInt], callback: (JSON?, NSError?) -> Void) {
         let idString = ",".join(locationIds.map {id in id.description})
         let request = "group?id=\(idString)"
-        sendRequest(request, callback: callback)
+        self.sendRequest(request, callback: callback)
     }
     
     func dailyForecastWeatherForLocation(location: String, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
         let request = "forecast/daily?q=\(location)&cnt=\(days)"
-        sendRequest(request, callback: callback)
+        self.sendRequest(request, callback: callback)
+    }
+    
+    func dailyForecastWeatherForLocationId(locationId: UInt, forDays days: UInt, callback: (JSON?, NSError?) -> Void) {
+        let request = "forecast/daily?id=\(locationId)"
+        self.sendRequest(request, callback: callback)
     }
 }
