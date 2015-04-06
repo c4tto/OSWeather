@@ -87,7 +87,7 @@ class TodayViewController: UIViewController {
         let attachement = NSTextAttachment()
         attachement.image = UIImage(named: "Arrow")
         let attachementString = NSAttributedString(attachment: attachement)
-        let placemarkString = NSMutableAttributedString(string: string)
+        let placemarkString = NSMutableAttributedString(string: " " + string)
         placemarkString.insertAttributedString(attachementString, atIndex: 0)
         return placemarkString
     }

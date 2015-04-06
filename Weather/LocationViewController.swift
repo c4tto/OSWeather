@@ -64,7 +64,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         let attachement = NSTextAttachment()
         attachement.image = UIImage(named: "Arrow")
         let attachementString = NSAttributedString(attachment: attachement)
-        let attributedString = NSMutableAttributedString(string: string)
+        let attributedString = NSMutableAttributedString(string: string + " ")
         attributedString.appendAttributedString(attachementString)
         return attributedString as NSAttributedString
     }
