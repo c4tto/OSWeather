@@ -51,6 +51,7 @@ class TodayViewController: UIViewController {
                     } else {
                         self.localityLabel.attributedText = NSAttributedString(string: location)
                     }
+                    self.shareButton.enabled = true
                 }
             }
 
