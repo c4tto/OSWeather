@@ -196,7 +196,23 @@ struct WeatherDataItem {
         windDirection = json["wind", "deg"].float
         windSpeed = json["wind", "speed"].float
     }
+    
+    init(_ json: JSON, locationItem: LocationItem) {
+        self.init(json)
+        self.locationName = locationItem.name
+        self.locationCountry = locationItem.country
+        self.locationIsoCountryCode = locationItem.isoCountryCode
+    }
+    
+    init(_ json: JSON, placemark: CLPlacemark) {
+        self.init(json)
+        self.locationName = placemark.locality
+        self.locationCountry = placemark.country
+        self.locationIsoCountryCode = placemark.ISOcountryCode
+    }
+    
 }
+
 /*
 http://api.openweathermap.org/data/2.5/weather?q=London,uk
 {
