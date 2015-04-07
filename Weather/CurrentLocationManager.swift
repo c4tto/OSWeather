@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationManager: NSObject {
+class CurrentLocationManager: NSObject {
     var cachedLocation: (date: NSDate, placemark: CLPlacemark)?
     var cacheExpirationInterval: NSTimeInterval = 10 * 60
     

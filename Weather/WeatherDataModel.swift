@@ -21,7 +21,7 @@ class WeatherDataModel: NSObject {
     let numberOfForecastedDays: UInt = 6
     var communicator: WeatherApiCommunicator
     var locationCoreDataModel: LocationCoreDataModel?
-    lazy var locationManager = LocationManager()
+    lazy var locationManager = CurrentLocationManager()
     
     init(communicator: WeatherApiCommunicator, locationCoreDataModel: LocationCoreDataModel?) {
         self.communicator = communicator
