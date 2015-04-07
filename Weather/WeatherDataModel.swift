@@ -176,6 +176,9 @@ class WeatherDataModel: NSObject {
     
     func deleteLocationAtIndex(index: Int) {
         self.deleteLocation(self.locations[index])
+        if index == self.selectedLocationIndex {
+            self.selectedLocationIndex = nil
+        }
     }
     
     func deleteLocation(locationItem: LocationItem) {
