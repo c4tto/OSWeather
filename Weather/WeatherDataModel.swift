@@ -70,16 +70,16 @@ class WeatherDataModel: NSObject {
         
         if locationIds.count > 0 {
             self.communicator.currentWeatherForLocationIds(locationIds) {(json, error) in
-                var weatherDataItems: [WeatherDataItem] = []
+                var weatherDataItems: [WeatherDataItem]? = nil
                 if let json = json {
                     for (index, subjson) in enumerate(json["list"].arrayValue) {
-                        weatherDataItems.append(WeatherDataItem(subjson, locationItem: locationItems[index]))
+                        weatherDataItems = (weatherDataItems ?? []) + [WeatherDataItem(subjson, locationItem: locationItems[index])]
                     }
                 }
                 callback(weatherDataItems, error)
             }
         } else {
-            callback([], nil)
+            callback(nil, nil)
         }
     }
     
@@ -126,10 +126,10 @@ class WeatherDataModel: NSObject {
     func forecastForLocationItem(locationItem: LocationItem, callback: ([WeatherDataItem]?, NSError?) -> Void) {
         if locationItem.weatherApiId > 0 {
             self.communicator.dailyForecastWeatherForLocationId(locationItem.weatherApiId, forDays: self.numberOfForecastedDays) {(json, error) in
-                var weatherDataItems: [WeatherDataItem] = []
+                var weatherDataItems: [WeatherDataItem]? = nil
                 if let json = json {
                     for subjson in json["list"].arrayValue {
-                        weatherDataItems.append(WeatherDataItem(subjson, locationItem: locationItem))
+                        weatherDataItems = (weatherDataItems ?? []) + [WeatherDataItem(subjson, locationItem: locationItem)]
                     }
                 }
                 callback(weatherDataItems, error)
@@ -137,10 +137,10 @@ class WeatherDataModel: NSObject {
         } else {
             let location = "\(locationItem.name),\(locationItem.isoCountryCode)"
             self.communicator.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays) {(json, error) in
-                var weatherDataItems: [WeatherDataItem] = []
+                var weatherDataItems: [WeatherDataItem]? = nil
                 if let json = json {
                     for subjson in json["list"].arrayValue {
-                        weatherDataItems.append(WeatherDataItem(subjson, locationItem: locationItem))
+                        weatherDataItems = (weatherDataItems ?? []) + [WeatherDataItem(subjson, locationItem: locationItem)]
                     }
                 }
                 // FIXME: add weatherApiId to LocationItem
@@ -154,10 +154,10 @@ class WeatherDataModel: NSObject {
             if let placemark = placemark {
                 let location = "\(placemark.locality),\(placemark.ISOcountryCode)"
                 self.communicator.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays) {(json, error) in
-                    var weatherDataItems: [WeatherDataItem] = []
+                    var weatherDataItems: [WeatherDataItem]? = nil
                     if let json = json {
                         for (index, subjson) in enumerate(json["list"].arrayValue) {
-                            weatherDataItems.append(WeatherDataItem(subjson, placemark: placemark))
+                            weatherDataItems = (weatherDataItems ?? []) + [WeatherDataItem(subjson, placemark: placemark)]
                         }
                     }
                     callback(weatherDataItems, error)
