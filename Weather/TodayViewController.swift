@@ -38,6 +38,7 @@ class TodayViewController: UIViewController {
         self.weatherDataModel.weatherForSelectedLocation {(weatherDataItem, error) in
             self.weatherDataItem = weatherDataItem
             self.updateView()
+            self.displayError(error)
         }
     }
     
