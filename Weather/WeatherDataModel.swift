@@ -21,31 +21,12 @@ class WeatherDataModel: NSObject {
     let numberOfForecastedDays: UInt = 6
     var communicator: WeatherApiCommunicator
     var locationCoreDataModel: LocationCoreDataModel?
-    lazy var locationManager = CLLocationManager.updateManagerWithAccuracy(kCLLocationAccuracyHundredMeters, locationAge: 15.0, authorizationDesciption: .WhenInUse)
+    lazy var locationManager = LocationManager()
     
     init(communicator: WeatherApiCommunicator, locationCoreDataModel: LocationCoreDataModel?) {
         self.communicator = communicator
         self.locationCoreDataModel = locationCoreDataModel
         super.init()
-    }
-    
-    // MARK: - Location
-    
-    private func currentLocation(callback: (CLPlacemark?, NSError?) -> Void) {
-        self.locationManager.startUpdatingLocationWithUpdateBlock {(manager, location, error, stopUpdating) in
-            if let location = location {
-                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
-                    if let placemark = placemarks?[0] as? CLPlacemark {
-                        callback(placemark, error)
-                    } else {
-                        callback(nil, error)
-                    }
-                })
-            } else {
-                callback(nil, error)
-            }
-            stopUpdating.memory = true
-        }
     }
     
     // MARK: - Weather
@@ -103,7 +84,7 @@ class WeatherDataModel: NSObject {
     }
     
     func weatherForCurrentLocation(callback: (WeatherDataItem?, NSError?) -> Void) {
-        self.currentLocation {(placemark, error) in
+        self.locationManager.currentLocation {(placemark, error) in
             if let placemark = placemark {
                 let location = "\(placemark.locality)" //,\(placemark.ISOcountryCode)"
                 self.communicator.currentWeatherForLocation(location) {(json, error) in
@@ -169,7 +150,7 @@ class WeatherDataModel: NSObject {
     }
     
     func forecastForCurrentLocation(callback: ([WeatherDataItem]?, NSError?) -> Void) {
-        self.currentLocation {(placemark, error) in
+        self.locationManager.currentLocation {(placemark, error) in
             if let placemark = placemark {
                 let location = "\(placemark.locality)" //,\(placemark.ISOcountryCode)"
                 self.communicator.dailyForecastWeatherForLocation(location, forDays: self.numberOfForecastedDays) {(json, error) in
