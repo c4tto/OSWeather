@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class LocationItem: NSManagedObject {
+class LocationDataItem: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var country: String
     @NSManaged var isoCountryCode: String

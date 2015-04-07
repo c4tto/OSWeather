@@ -40,7 +40,7 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func weatherForLocationItem(locationItem: LocationItem, callback: (WeatherDataItem?, NSError?) -> Void) {
+    func weatherForLocationItem(locationItem: LocationDataItem, callback: (WeatherDataItem?, NSError?) -> Void) {
         if locationItem.weatherApiId > 0 {
             self.weatherForLocationItemsWithId([locationItem]) {(weatherDataItems, error) in
                 callback(weatherDataItems?[0], error)
@@ -61,7 +61,7 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func weatherForLocationItemsWithId(locationItems: [LocationItem], callback: ([WeatherDataItem]?, NSError?) -> Void) {
+    func weatherForLocationItemsWithId(locationItems: [LocationDataItem], callback: ([WeatherDataItem]?, NSError?) -> Void) {
         let locationIds = locationItems.filter({
             $0.weatherApiId > 0
         }).map({
@@ -123,7 +123,7 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func forecastForLocationItem(locationItem: LocationItem, callback: ([WeatherDataItem]?, NSError?) -> Void) {
+    func forecastForLocationItem(locationItem: LocationDataItem, callback: ([WeatherDataItem]?, NSError?) -> Void) {
         if locationItem.weatherApiId > 0 {
             self.communicator.dailyForecastWeatherForLocationId(locationItem.weatherApiId, forDays: self.numberOfForecastedDays) {(json, error) in
                 var weatherDataItems: [WeatherDataItem]? = nil
@@ -184,11 +184,11 @@ class WeatherDataModel: NSObject {
         }
     }
     
-    func deleteLocation(locationItem: LocationItem) {
+    func deleteLocation(locationItem: LocationDataItem) {
         self.locationCoreDataModel?.deleteItem(locationItem)
     }
     
-    var locations: [LocationItem] {
+    var locations: [LocationDataItem] {
         return self.locationCoreDataModel?.items ?? []
     }
 }

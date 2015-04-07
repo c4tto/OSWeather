@@ -197,7 +197,7 @@ struct WeatherDataItem {
         windSpeed = json["wind", "speed"].float
     }
     
-    init(_ json: JSON, locationItem: LocationItem) {
+    init(_ json: JSON, locationItem: LocationDataItem) {
         self.init(json)
         self.locationName = locationItem.name
         self.locationCountry = locationItem.country

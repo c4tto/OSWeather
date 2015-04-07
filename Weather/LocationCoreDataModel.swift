@@ -12,7 +12,7 @@ import CoreData
 class LocationCoreDataModel: NSObject {
     
     let managedObjectContext: NSManagedObjectContext
-    let itemName = "LocationItem"
+    let itemName = "LocationDataItem"
     var error: NSError? = nil
     
     init(managedObjectContext: NSManagedObjectContext) {
@@ -30,18 +30,18 @@ class LocationCoreDataModel: NSObject {
         return false
     }
     
-    var _items: [LocationItem]?
+    var _items: [LocationDataItem]?
     
-    var items: [LocationItem]? {
+    var items: [LocationDataItem]? {
         if _items == nil {
             let fetchRequest = NSFetchRequest(entityName: itemName)
-            _items = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &self.error) as? [LocationItem]
+            _items = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &self.error) as? [LocationDataItem]
         }
         return _items
     }
     
     func newItemWithName(name: String, country: String, countryCode: String) {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName(itemName, inManagedObjectContext: self.managedObjectContext) as LocationItem
+        let newItem = NSEntityDescription.insertNewObjectForEntityForName(itemName, inManagedObjectContext: self.managedObjectContext) as LocationDataItem
         newItem.name = name
         newItem.country = country
         newItem.isoCountryCode = countryCode
@@ -49,7 +49,7 @@ class LocationCoreDataModel: NSObject {
         _items = nil
     }
     
-    func deleteItem(item: LocationItem) {
+    func deleteItem(item: LocationDataItem) {
         self.managedObjectContext.deleteObject(item)
         self.saveContext()
         _items = nil
