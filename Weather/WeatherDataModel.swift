@@ -142,8 +142,11 @@ class WeatherDataModel: NSObject {
                     for subjson in json["list"].arrayValue {
                         weatherDataItems = (weatherDataItems ?? []) + [WeatherDataItem(subjson, locationItem: locationItem)]
                     }
+                    if let locationId = weatherDataItems?[0].locationId {
+                        locationItem.weatherApiId = locationId
+                        self.locationCoreDataModel?.saveContext()
+                    }
                 }
-                // FIXME: add weatherApiId to LocationItem
                 callback(weatherDataItems, error)
             }
         }
