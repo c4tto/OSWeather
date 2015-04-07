@@ -191,4 +191,13 @@ class WeatherDataModel: NSObject {
     var locations: [LocationDataItem] {
         return self.locationCoreDataModel?.items ?? []
     }
+    
+    // MARK: -
+    func descriptionForError(error: NSError) -> String {
+        if error.domain == kCLErrorDomain {
+            return "Current location detection is not available."
+        } else {
+            return error.localizedDescription
+        }
+    }
 }

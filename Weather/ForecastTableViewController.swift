@@ -10,7 +10,11 @@ import UIKit
 
 class ForecastTableViewController: UITableViewController {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var errorLabel: UILabel!
+    
     var weatherDataItems: [WeatherDataItem]?
+    var error: NSError?
     
     // MARK: - View Lifecycle
 
@@ -25,21 +29,29 @@ class ForecastTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         self.weatherDataItems = nil
+        self.error = nil
         self.updateView()
         
         self.weatherDataModel.forecastForSelectedLocation {(weatherDataItems, error) in
             self.weatherDataItems = weatherDataItems
+            self.error = error
             self.updateView()
-            self.displayError(error)
         }
     }
     
     func updateView() {
         if let weatherDataItems = self.weatherDataItems {
+            self.tableView.backgroundView = nil
             self.navigationItem.title = weatherDataItems[0].locationName
+        } else if let error = self.error {
+            self.navigationItem.title = nil
+            self.errorLabel.text = self.weatherDataModel.descriptionForError(error)
+            self.errorLabel.sizeToFit()
+            self.tableView.backgroundView = self.errorLabel
         } else {
             self.navigationItem.title = nil
-            // show loading spinner
+            self.tableView.backgroundView = self.activityIndicator
+            self.activityIndicator.startAnimating()
         }
         self.tableView.reloadData()
     }

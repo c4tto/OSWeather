@@ -10,6 +10,7 @@ import UIKit
 
 class TodayViewController: UIViewController {
     
+    @IBOutlet var weatherInfoView: UIView!
     @IBOutlet var weatherImageView: UIImageView!
     @IBOutlet var localityLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
@@ -21,7 +22,11 @@ class TodayViewController: UIViewController {
     @IBOutlet var windSpeedLabel: UILabel!
     @IBOutlet var shareButton: UIButton!
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var errorLabel: UILabel!
+    
     var weatherDataItem: WeatherDataItem?
+    var error: NSError?
 
     // MARK: - View Lifecycle
     
@@ -33,17 +38,21 @@ class TodayViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.weatherDataItem = nil
+        self.error = nil
         self.updateView()
         
         self.weatherDataModel.weatherForSelectedLocation {(weatherDataItem, error) in
             self.weatherDataItem = weatherDataItem
+            self.error = error
             self.updateView()
-            self.displayError(error)
         }
     }
     
     func updateView() {
         if let weatherDataItem = self.weatherDataItem {
+            self.activityIndicator.hidden = true
+            self.errorLabel.hidden = true
+            self.weatherInfoView.hidden = false
             if let name = weatherDataItem.locationName {
                 if let country = weatherDataItem.locationCountry {
                     var location = "\(name), \(country)"
@@ -80,7 +89,17 @@ class TodayViewController: UIViewController {
             if let windSpeedString = weatherDataItem.windSpeedString {
                 self.windSpeedLabel.text = windSpeedString
             }
+        } else if let error = self.error {
+            self.weatherInfoView.hidden = true
+            self.activityIndicator.hidden = true
+            self.errorLabel.hidden = false
+            self.errorLabel.text = self.weatherDataModel.descriptionForError(error)
+            self.errorLabel.sizeToFit()
         } else {
+            self.weatherInfoView.hidden = true
+            self.errorLabel.hidden = true
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
             // show loading spinner
         }
     }

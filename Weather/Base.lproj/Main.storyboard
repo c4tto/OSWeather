@@ -8,6 +8,8 @@
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
             <string>ProximaNova-Semibold</string>
@@ -173,11 +175,23 @@
                                     <constraint firstAttribute="width" constant="320" id="UP9-Tm-fbF"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="xWO-Vg-qMG" userLabel="Error Label">
+                                <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qW2-qb-Rmg">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="gn7-ut-cG7" secondAttribute="centerY" constant="-14" id="4fH-vp-LDj"/>
+                            <constraint firstAttribute="centerY" secondItem="qW2-qb-Rmg" secondAttribute="centerY" id="Ays-9J-oHA"/>
                             <constraint firstAttribute="centerX" secondItem="gn7-ut-cG7" secondAttribute="centerX" id="MuP-bI-R0X"/>
+                            <constraint firstAttribute="centerX" secondItem="xWO-Vg-qMG" secondAttribute="centerX" id="NTX-y9-ERF"/>
+                            <constraint firstAttribute="centerY" secondItem="xWO-Vg-qMG" secondAttribute="centerY" constant="-0.5" id="fQx-kP-8kR"/>
+                            <constraint firstAttribute="centerX" secondItem="qW2-qb-Rmg" secondAttribute="centerX" id="vhd-Ms-lDJ"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -190,7 +204,9 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="qW2-qb-Rmg" id="pCi-G5-wZ7"/>
                         <outlet property="conditionLabel" destination="c48-LM-xfh" id="zNB-xM-tvZ"/>
+                        <outlet property="errorLabel" destination="xWO-Vg-qMG" id="XTc-4m-Rui"/>
                         <outlet property="humidityLabel" destination="1Rl-qf-hOq" id="85N-7Z-qYx"/>
                         <outlet property="localityLabel" destination="VDM-rC-7pD" id="CSA-lz-Bl0"/>
                         <outlet property="pressureLabel" destination="f2C-mn-k5c" id="GoS-al-2Gc"/>
@@ -198,6 +214,7 @@
                         <outlet property="shareButton" destination="NYI-gj-YhH" id="Xwy-8y-xei"/>
                         <outlet property="temperatureLabel" destination="Hnv-Ng-ZZL" id="oiW-az-nlk"/>
                         <outlet property="weatherImageView" destination="d61-eZ-Eca" id="ahX-vc-lWB"/>
+                        <outlet property="weatherInfoView" destination="gn7-ut-cG7" id="cIw-Fc-vLy"/>
                         <outlet property="windDirectionLabel" destination="d98-Nb-Jsd" id="ttY-cy-nAT"/>
                         <outlet property="windSpeedLabel" destination="fGp-SA-KYb" id="VnP-Fe-cO0"/>
                     </connections>
@@ -246,8 +263,23 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="tau-Ig-o5f" id="gqx-0f-IxQ"/>
+                        <outlet property="errorLabel" destination="WoW-dM-9dk" id="IQx-ld-cek"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRk-bf-kXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" id="WoW-dM-9dk" userLabel="Error Label">
+                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="tau-Ig-o5f">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="1493" y="380"/>
         </scene>
@@ -507,6 +539,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rwM-NL-Ox8"/>
-        <segue reference="Yz3-ba-bcK"/>
+        <segue reference="xXn-wY-hgb"/>
     </inferredMetricsTieBreakers>
 </document>

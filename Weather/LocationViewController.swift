@@ -29,10 +29,12 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.updateView()
         
-        self.weatherDataModel.weatherForCurrentLocation {(weatherDataItem, error) in
-            self.currentWeatherDataItem = weatherDataItem
-            self.updateView()
-            self.displayError(error)
+        if CLLocationManager.isLocationUpdatesAvailable() {
+            self.weatherDataModel.weatherForCurrentLocation {(weatherDataItem, error) in
+                self.currentWeatherDataItem = weatherDataItem
+                self.updateView()
+                self.displayError(error)
+            }
         }
         
         self.weatherDataModel.weatherForStoredLocations {(weatherDataItems, error) in
@@ -77,7 +79,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return CLLocationManager.isLocationUpdatesAvailable() ? 1 : 0
         } else {
             return self.weatherDataModel.locations.count
         }
