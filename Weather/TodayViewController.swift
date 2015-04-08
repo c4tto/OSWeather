@@ -99,7 +99,6 @@ class TodayViewController: UIViewController {
             self.weatherInfoView.hidden = true
             self.errorLabel.hidden = true
             self.activityIndicator.hidden = false
-            self.activityIndicator.startAnimating()
             // show loading spinner
         }
     }

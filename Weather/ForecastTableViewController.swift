@@ -51,7 +51,6 @@ class ForecastTableViewController: UITableViewController {
         } else {
             self.navigationItem.title = nil
             self.tableView.backgroundView = self.activityIndicator
-            self.activityIndicator.startAnimating()
         }
         self.tableView.reloadData()
     }
