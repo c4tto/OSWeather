@@ -17,7 +17,6 @@ extension UIViewController {
 
 class WeatherDataModel: NSObject {
     
-    var selectedLocationIndex: Int? = nil
     let numberOfForecastedDays: UInt = 6
     var communicator: WeatherApiCommunicator
     var locationCoreDataModel: LocationCoreDataModel?
@@ -27,6 +26,19 @@ class WeatherDataModel: NSObject {
         self.communicator = communicator
         self.locationCoreDataModel = locationCoreDataModel
         super.init()
+    }
+    
+    var selectedLocationIndex: Int? {
+        get {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let number = userDefaults.objectForKey("selectedLocationIndex") as NSNumber?
+            return number?.integerValue
+        }
+        set(index) {
+            let number: NSNumber? = index != nil ? NSNumber(long: index!) : nil
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(number, forKey: "selectedLocationIndex")
+        }
     }
     
     // MARK: - Weather
