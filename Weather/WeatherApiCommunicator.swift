@@ -67,16 +67,28 @@ class WeatherApiCommunicator: NSObject {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         println(url)
+        
         manager.GET(escapedUrl, parameters: nil,
             success: {(operation: AFHTTPRequestOperation!, response: AnyObject?) in
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 println(response?.description)
+                
                 if let response: AnyObject = response {
                     let json = JSON(response)
-                    self.cache[url] = (date: NSDate(), json)
-                    callback(json, nil)
+                    
+                    let code = json["cod"].int ?? json["cod"].string?.toInt() ?? 200
+                    if  code == 200 {
+                        self.cache[url] = (date: NSDate(), json)
+                        callback(json, nil)
+                        return;
+                    } else {
+                        let error = NSError(domain: "WeatherErrorDomain", code: code, userInfo: [
+                            NSLocalizedDescriptionKey: json["message"].string ?? "Unknown error"
+                        ])
+                        callback(nil, error)
+                    }
                 } else {
-                    let error = NSError(domain: "WeatherLocalErrorDomain", code: -1, userInfo: [
+                    let error = NSError(domain: "WeatherErrorDomain", code: -1, userInfo: [
                         NSLocalizedDescriptionKey: "No HTTP response available"
                     ])
                     callback(nil, error)
