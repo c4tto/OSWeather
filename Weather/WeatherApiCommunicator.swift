@@ -82,8 +82,12 @@ class WeatherApiCommunicator: NSObject {
                         callback(json, nil)
                         return;
                     } else {
+                        var description = "OpenWeatherMap server error"
+                        if let message = json["message"].string {
+                            description += ":\n" + message
+                        }
                         let error = NSError(domain: "WeatherErrorDomain", code: code, userInfo: [
-                            NSLocalizedDescriptionKey: json["message"].string ?? "Unknown error"
+                            NSLocalizedDescriptionKey: description
                         ])
                         callback(nil, error)
                     }
