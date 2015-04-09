@@ -40,16 +40,17 @@ class ForecastTableViewController: UITableViewController {
     }
     
     func updateView() {
+        self.navigationItem.title = self.weatherDataModel.selectedLocation?.name ??
+                                    self.weatherDataModel.locationManager.placemark?.locality
+        
         if let weatherDataItems = self.weatherDataItems {
             self.tableView.backgroundView = nil
-            self.navigationItem.title = weatherDataItems[0].locationName
         } else if let error = self.error {
             self.navigationItem.title = nil
             self.errorLabel.text = self.weatherDataModel.descriptionForError(error)
             self.errorLabel.sizeToFit()
             self.tableView.backgroundView = self.errorLabel
         } else {
-            self.navigationItem.title = self.weatherDataModel.selectedLocation?.name
             self.tableView.backgroundView = self.activityIndicator
         }
         self.tableView.reloadData()

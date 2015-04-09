@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -211,6 +211,9 @@
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HorizontalDivider" translatesAutoresizingMaskIntoConstraints="NO" id="Ufp-46-J08">
                                         <rect key="frame" x="237" y="313" width="127" height="1"/>
                                     </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qW2-qb-Rmg">
+                                        <rect key="frame" x="288" y="168" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -222,6 +225,7 @@
                                     <constraint firstItem="VDM-rC-7pD" firstAttribute="centerX" secondItem="kzG-2C-Y7L" secondAttribute="centerX" constant="0.5" id="DFm-io-rYe"/>
                                     <constraint firstAttribute="centerX" secondItem="NYI-gj-YhH" secondAttribute="centerX" constant="-0.5" id="J6x-3J-OY2"/>
                                     <constraint firstItem="d61-eZ-Eca" firstAttribute="centerX" secondItem="kzG-2C-Y7L" secondAttribute="centerX" constant="1" id="K5V-el-uWS"/>
+                                    <constraint firstItem="d61-eZ-Eca" firstAttribute="centerY" secondItem="qW2-qb-Rmg" secondAttribute="centerY" constant="-0.5" id="KBx-a4-bfK"/>
                                     <constraint firstItem="1a6-hj-vUf" firstAttribute="top" secondItem="dVM-0s-noj" secondAttribute="bottom" constant="74" id="NpR-DA-3PL"/>
                                     <constraint firstAttribute="centerX" secondItem="Ufp-46-J08" secondAttribute="centerX" constant="-0.5" id="OKZ-n2-y5A"/>
                                     <constraint firstAttribute="centerX" secondItem="d61-eZ-Eca" secondAttribute="centerX" constant="-0.5" id="R3D-J7-0mL"/>
@@ -242,6 +246,7 @@
                                     <constraint firstAttribute="centerY" secondItem="Ufp-46-J08" secondAttribute="centerY" constant="-13.5" id="uwo-yL-KYi"/>
                                     <constraint firstAttribute="centerY" secondItem="NYI-gj-YhH" secondAttribute="centerY" constant="-178" id="w0Q-oi-cDX"/>
                                     <constraint firstItem="kzG-2C-Y7L" firstAttribute="top" secondItem="VDM-rC-7pD" secondAttribute="bottom" constant="12" id="zZp-3c-zQh"/>
+                                    <constraint firstItem="d61-eZ-Eca" firstAttribute="centerX" secondItem="qW2-qb-Rmg" secondAttribute="centerX" constant="2.5" id="ziQ-7G-lH8"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -251,17 +256,14 @@
                                 </variation>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="xWO-Vg-qMG" userLabel="Error Label">
+                                <rect key="frame" x="300" y="301" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="18"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qW2-qb-Rmg">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="qW2-qb-Rmg" secondAttribute="centerY" id="Ays-9J-oHA"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="gn7-ut-cG7" secondAttribute="bottom" constant="-44" id="JWl-FK-oro"/>
                             <constraint firstAttribute="centerX" secondItem="gn7-ut-cG7" secondAttribute="centerX" id="MuP-bI-R0X"/>
                             <constraint firstAttribute="centerX" secondItem="xWO-Vg-qMG" secondAttribute="centerX" id="NTX-y9-ERF"/>
@@ -269,7 +271,6 @@
                             <constraint firstItem="gn7-ut-cG7" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="-64" id="flG-Gl-X5K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gn7-ut-cG7" secondAttribute="trailing" constant="-16" id="gun-C2-2in"/>
                             <constraint firstItem="gn7-ut-cG7" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-16" id="vYW-2D-TFc"/>
-                            <constraint firstAttribute="centerX" secondItem="qW2-qb-Rmg" secondAttribute="centerX" id="vhd-Ms-lDJ"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

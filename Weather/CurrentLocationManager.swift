@@ -12,14 +12,21 @@ class CurrentLocationManager: NSObject {
     var cachedLocation: (date: NSDate, placemark: CLPlacemark)?
     var cacheExpirationInterval: NSTimeInterval = 10 * 60
     
+    var placemark: CLPlacemark? {
+        if let cachedLocation = self.cachedLocation {
+            if cachedLocation.date.timeIntervalSinceNow > -self.cacheExpirationInterval {
+                return cachedLocation.placemark
+            }
+        }
+        return nil
+    }
+    
     lazy var locationManager = CLLocationManager.updateManagerWithAccuracy(kCLLocationAccuracyHundredMeters, locationAge: 15.0, authorizationDesciption: .WhenInUse)
     
     func currentLocation(callback: (CLPlacemark?, NSError?) -> Void) {
-        if let cachedLocation = self.cachedLocation {
-            if cachedLocation.date.timeIntervalSinceNow > -self.cacheExpirationInterval {
-                callback(cachedLocation.placemark, nil)
-                return
-            }
+        if let placemark = self.placemark {
+            callback(placemark, nil)
+            return
         }
         
         self.locationManager.startUpdatingLocationWithUpdateBlock {(manager, location, error, stopUpdating) in
@@ -38,5 +45,4 @@ class CurrentLocationManager: NSObject {
             stopUpdating.memory = true
         }
     }
-
 }

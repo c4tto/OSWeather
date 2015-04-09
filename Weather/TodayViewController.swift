@@ -49,57 +49,37 @@ class TodayViewController: UIViewController {
     }
     
     func updateView() {
-        if let weatherDataItem = self.weatherDataItem {
-            self.activityIndicator.hidden = true
-            self.errorLabel.hidden = true
-            self.weatherInfoView.hidden = false
-            if let name = weatherDataItem.locationName {
-                if let country = weatherDataItem.locationCountry {
-                    var location = "\(name), \(country)"
-                    if self.weatherDataModel.selectedLocationIndex == nil {
-                        self.localityLabel.attributedText = self.attributedStringWithArrow(location)
-                    } else {
-                        self.localityLabel.attributedText = NSAttributedString(string: location)
-                    }
-                    self.shareButton.enabled = true
-                }
-            }
-
-            if let image = weatherDataItem.image {
-                self.weatherImageView.image = image
-            }
-            if let conditionString = weatherDataItem.conditionString {
-                self.conditionLabel.text = conditionString
-            }
-            if let temperatureString = weatherDataItem.temperatureString {
-                self.temperatureLabel.text = temperatureString
-            }
-            if let humidityString = weatherDataItem.humidityString {
-                self.humidityLabel.text = humidityString
-            }
-            if let rainString = weatherDataItem.rainString {
-                self.rainLabel.text = rainString
-            }
-            if let pressureString = weatherDataItem.pressureString {
-                self.pressureLabel.text = pressureString
-            }
-            if let windDirectionString = weatherDataItem.windDirectionString {
-                self.windDirectionLabel.text = windDirectionString
-            }
-            if let windSpeedString = weatherDataItem.windSpeedString {
-                self.windSpeedLabel.text = windSpeedString
-            }
-        } else if let error = self.error {
+        if let error = self.error {
             self.weatherInfoView.hidden = true
             self.activityIndicator.hidden = true
             self.errorLabel.hidden = false
             self.errorLabel.text = self.weatherDataModel.descriptionForError(error)
             self.errorLabel.sizeToFit()
         } else {
-            self.weatherInfoView.hidden = true
+            self.weatherInfoView.hidden = false
             self.errorLabel.hidden = true
-            self.activityIndicator.hidden = false
-            // show loading spinner
+            self.activityIndicator.hidden = self.weatherDataItem != nil
+            
+            if let location = self.weatherDataModel.selectedLocation {
+                let locationString = "\(location.name), \(location.country)"
+                self.localityLabel.attributedText = NSAttributedString(string: locationString)
+            } else if let placemark = self.weatherDataModel.locationManager.placemark {
+                var location = "\(placemark.locality), \(placemark.country)"
+                self.localityLabel.attributedText = self.attributedStringWithArrow(location)
+            } else {
+                self.localityLabel.attributedText = NSAttributedString(string: "----")
+            }
+            
+            self.weatherImageView.image = self.weatherDataItem?.image
+            self.conditionLabel.text = self.weatherDataItem?.conditionString ?? "----"
+            self.temperatureLabel.text = self.weatherDataItem?.temperatureString ?? "----"
+            self.humidityLabel.text = self.weatherDataItem?.humidityString ?? "----"
+            self.rainLabel.text = self.weatherDataItem?.rainString ?? "----"
+            self.pressureLabel.text = self.weatherDataItem?.pressureString ?? "----"
+            self.windDirectionLabel.text = self.weatherDataItem?.windDirectionString ?? "----"
+            self.windSpeedLabel.text = self.weatherDataItem?.windSpeedString ?? "----"
+            
+            self.shareButton.enabled = self.weatherDataItem != nil
         }
     }
     
