@@ -197,11 +197,11 @@ struct WeatherDataItem {
         windSpeed = json["wind", "speed"].float
     }
     
-    init(_ json: JSON, locationItem: LocationDataItem) {
+    init(_ json: JSON, location: LocationDataItem) {
         self.init(json)
-        self.locationName = locationItem.name
-        self.locationCountry = locationItem.country
-        self.locationIsoCountryCode = locationItem.isoCountryCode
+        self.locationName = location.name
+        self.locationCountry = location.country
+        self.locationIsoCountryCode = location.isoCountryCode
     }
     
     init(_ json: JSON, placemark: CLPlacemark) {
