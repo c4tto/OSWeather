@@ -28,25 +28,11 @@ class WeatherDataModel: NSObject {
         super.init()
     }
     
-    var selectedLocationIndex: Int? {
-        get {
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            let number = userDefaults.objectForKey("selectedLocationIndex") as! NSNumber?
-            return number?.integerValue
-        }
-        set(index) {
-            let number: NSNumber? = index != nil ? NSNumber(long: index!) : nil
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setObject(number, forKey: "selectedLocationIndex")
-        }
-    }
-    
     // MARK: - Weather
     
     func weatherForSelectedLocation(callback: (WeatherDataItem?, NSError?) -> Void) {
-        if let index = self.selectedLocationIndex {
-            let item = self.locations[index]
-            self.weatherForLocationItem(item, callback: callback)
+        if let location = self.selectedLocation {
+            self.weatherForLocationItem(location, callback: callback)
         } else {
             self.weatherForCurrentLocation(callback)
         }
@@ -127,9 +113,8 @@ class WeatherDataModel: NSObject {
     // MARK: - Forecast
     
     func forecastForSelectedLocation(callback: ([WeatherDataItem]?, NSError?) -> Void) {
-        if let index = self.selectedLocationIndex {
-            let item = self.locations[index]
-            self.forecastForLocationItem(item, callback: callback)
+        if let location = self.selectedLocation {
+            self.forecastForLocationItem(location, callback: callback)
         } else {
             self.forecastForCurrentLocation(callback)
         }
@@ -185,6 +170,19 @@ class WeatherDataModel: NSObject {
     
     // MARK: - Stored locations management
     
+    var selectedLocationIndex: Int? {
+        get {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let number = userDefaults.objectForKey("selectedLocationIndex") as! NSNumber?
+            return number?.integerValue
+        }
+        set(index) {
+            let number: NSNumber? = index != nil ? NSNumber(long: index!) : nil
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(number, forKey: "selectedLocationIndex")
+        }
+    }
+    
     func addLocationWithName(name: String, country: String, countryCode: String) {
         self.locationCoreDataModel?.newItemWithName(name, country: country, countryCode: countryCode)
     }
@@ -204,7 +202,15 @@ class WeatherDataModel: NSObject {
         return self.locationCoreDataModel?.items ?? []
     }
     
+    var selectedLocation: LocationDataItem? {
+        if let index = self.selectedLocationIndex {
+            return self.locations[index]
+        }
+        return nil
+    }
+    
     // MARK: -
+    
     func descriptionForError(error: NSError) -> String {
         if error.domain == kCLErrorDomain {
             return "Current location detection is not available."
