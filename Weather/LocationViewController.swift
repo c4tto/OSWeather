@@ -12,7 +12,6 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    var loadingVisible: Bool = false
     
     var currentWeatherDataItem: WeatherDataItem? = nil
     var cachedWeatherDataItems: [UInt: WeatherDataItem] = [:]
@@ -112,7 +111,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as! WeatherTableViewCell
         
         var weatherDataItem: WeatherDataItem? = nil
         

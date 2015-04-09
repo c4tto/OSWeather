@@ -41,7 +41,7 @@ class LocationCoreDataModel: NSObject {
     }
     
     func newItemWithName(name: String, country: String, countryCode: String) {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName(itemName, inManagedObjectContext: self.managedObjectContext) as LocationDataItem
+        let newItem = NSEntityDescription.insertNewObjectForEntityForName(itemName, inManagedObjectContext: self.managedObjectContext) as! LocationDataItem
         newItem.name = name
         newItem.country = country
         newItem.isoCountryCode = countryCode

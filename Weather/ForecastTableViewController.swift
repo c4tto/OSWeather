@@ -70,7 +70,7 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as WeatherTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("weatherCell", forIndexPath: indexPath) as! WeatherTableViewCell
         
         if let weatherDataItem = self.weatherDataItems?[indexPath.row] {
             if let weakDayString = weatherDataItem.weakDayString {

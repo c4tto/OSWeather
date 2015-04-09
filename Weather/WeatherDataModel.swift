@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     var weatherDataModel: WeatherDataModel {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         return appDelegate.weatherDataModel
     }
 }
@@ -31,7 +31,7 @@ class WeatherDataModel: NSObject {
     var selectedLocationIndex: Int? {
         get {
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            let number = userDefaults.objectForKey("selectedLocationIndex") as NSNumber?
+            let number = userDefaults.objectForKey("selectedLocationIndex") as! NSNumber?
             return number?.integerValue
         }
         set(index) {
@@ -46,7 +46,7 @@ class WeatherDataModel: NSObject {
     func weatherForSelectedLocation(callback: (WeatherDataItem?, NSError?) -> Void) {
         if let index = self.selectedLocationIndex {
             let item = self.locations[index]
-            self.weatherForLocationItem(item, callback)
+            self.weatherForLocationItem(item, callback: callback)
         } else {
             self.weatherForCurrentLocation(callback)
         }
@@ -129,7 +129,7 @@ class WeatherDataModel: NSObject {
     func forecastForSelectedLocation(callback: ([WeatherDataItem]?, NSError?) -> Void) {
         if let index = self.selectedLocationIndex {
             let item = self.locations[index]
-            self.forecastForLocationItem(item, callback)
+            self.forecastForLocationItem(item, callback: callback)
         } else {
             self.forecastForCurrentLocation(callback)
         }

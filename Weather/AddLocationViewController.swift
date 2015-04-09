@@ -38,7 +38,7 @@ class AddLocationViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         let placemark = self.mapItems[indexPath.row].placemark
         cell.textLabel?.text = "\(placemark.locality), \(placemark.country)"
         return cell
@@ -61,7 +61,7 @@ class AddLocationViewController: UIViewController, UITableViewDataSource, UITabl
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler {(response, error) in
             if let response = response {
-                let mapItems = response.mapItems as [MKMapItem]
+                let mapItems = response.mapItems as! [MKMapItem]
                 self.mapItems = mapItems.filter {(mapItem) in
                     return mapItem.placemark.locality != nil
                 }
