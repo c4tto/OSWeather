@@ -49,7 +49,7 @@ class ForecastTableViewController: UITableViewController {
             self.errorLabel.sizeToFit()
             self.tableView.backgroundView = self.errorLabel
         } else {
-            self.navigationItem.title = nil
+            self.navigationItem.title = self.weatherDataModel.selectedLocation?.name
             self.tableView.backgroundView = self.activityIndicator
         }
         self.tableView.reloadData()
