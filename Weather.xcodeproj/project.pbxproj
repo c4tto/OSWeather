@@ -34,7 +34,7 @@
 		2BF383341ACBC80900350EEB /* WeatherDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF383331ACBC80900350EEB /* WeatherDataItem.swift */; };
 		2BF5ED961ABE99420073166A /* UIColor+RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF5ED951ABE99420073166A /* UIColor+RGBA.swift */; };
 		2BF8C5BF1ACC113B0054EB43 /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF8C5BE1ACC113B0054EB43 /* UIViewController+Error.swift */; };
-		3DC0003D3B0605DD6AE8A57B /* libPods-Weather.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39CD8BC96786838EBA230C60 /* libPods-Weather.a */; };
+		2FE5055BAA1F72AE0CDB9231 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7627CB248B721695235BEBE9 /* Pods_Weather.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +81,8 @@
 		2BF383331ACBC80900350EEB /* WeatherDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDataItem.swift; sourceTree = "<group>"; };
 		2BF5ED951ABE99420073166A /* UIColor+RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBA.swift"; sourceTree = "<group>"; };
 		2BF8C5BE1ACC113B0054EB43 /* UIViewController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Error.swift"; sourceTree = "<group>"; };
-		39CD8BC96786838EBA230C60 /* libPods-Weather.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weather.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6996A36AC7F94B9651EDB9EE /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
+		7627CB248B721695235BEBE9 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DC0003D3B0605DD6AE8A57B /* libPods-Weather.a in Frameworks */,
+				2FE5055BAA1F72AE0CDB9231 /* Pods_Weather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +284,7 @@
 		ED36BBBBE9B401BFB3AA440B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				39CD8BC96786838EBA230C60 /* libPods-Weather.a */,
+				7627CB248B721695235BEBE9 /* Pods_Weather.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -301,6 +301,7 @@
 				2B8FD0581ABD596300265318 /* Frameworks */,
 				2B8FD0591ABD596300265318 /* Resources */,
 				E75D882ABE78806246339819 /* Copy Pods Resources */,
+				F3C9AEBCBDC52EB8B2B684ED /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -420,6 +421,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3C9AEBCBDC52EB8B2B684ED /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -574,7 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Weather/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Weather/Weather-Bridging-Header.h";
@@ -588,7 +604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Weather/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Weather/Weather-Bridging-Header.h";

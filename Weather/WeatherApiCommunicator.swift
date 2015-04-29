@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 enum WeatherApiUnits {
     case Internal

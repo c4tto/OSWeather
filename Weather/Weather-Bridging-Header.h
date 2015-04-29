@@ -10,6 +10,7 @@
 #define Weather_Weather_Bridging_Header_h
 
 #import <AFNetworking/AFNetworking.h>
-#import <CLLocationManager-blocks/CLLocationManager+blocks.h>
+#import <CLLocationManager_blocks/CLLocationManager+blocks.h>
+
 
 #endif
